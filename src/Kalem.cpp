@@ -31,7 +31,9 @@ Kalem::Init(std::string kl_file_name) {
 int main(int argc, char** argv) {
     if(argc < 2) {
         std::cout << "Fegeya Kalem compiler\n";
-        std::cout << "kalem file\n";
+        std::cout << "Usage: " << argv[0] << " [options] file...\n";
+        std::cout << "Options:\n" <<
+            "--cpp : Output C++ code\n";
         
         return 0;
     }
@@ -40,8 +42,18 @@ int main(int argc, char** argv) {
     KalemStructure _structure;
     ExecutePlusPlus _exec;
     
+    bool option = false;
+
     std::string kl_source_file(argv[1]);
     
+    if(kl_source_file == "--cpp" && argc > 2) {
+        kl_source_file.erase();
+
+        kl_source_file.append(argv[2]);
+
+        option = true;
+    }
+
     kl_source_file = stringtools::EraseAllSubString(kl_source_file, ".kalem");
     
     kalem_t _main = kalem.Init(kl_source_file + ".kalem");
@@ -51,8 +63,10 @@ int main(int argc, char** argv) {
     fsplusplus::CreateFile(kl_source_file + ".cpp", __codegen_.kl_generated);
     
     _exec.RunFunction("clang++ -std=c++17 " + kl_source_file + ".cpp -o " + kl_source_file);
-    
-    _exec.RunFunction("rm -f " + kl_source_file + ".cpp");
+
+    if(option == false) {
+        _exec.RunFunction("rm -f " + kl_source_file + ".cpp");
+    }
     
     return 0;
 }
