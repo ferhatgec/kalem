@@ -1,0 +1,7 @@
+#import <iostream>
+
+@main int {
+	@print "Hello, Kalem!\n"
+	@return 0
+}
+
