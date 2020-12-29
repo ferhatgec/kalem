@@ -14,7 +14,7 @@
 #include "../include/Kalem_Codegen.hpp"
 
 void
-Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _append) {
+Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string _append) {
     switch(_token) {
         case KALEM_IMPORT:
         {
@@ -24,6 +24,20 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _append) {
             break;
         }
         
+        case KALEM_STRING:
+        {
+            _codegen.kl_generated.append(_CPP_KALEM_STRING);
+            _codegen.kl_generated.append(" " + _variable);
+
+            if(_append != "") {
+                _codegen.kl_generated.append(_append);
+            }
+
+            _codegen.kl_generated.append(";");
+
+            break;
+        }
+
         case KALEM_MAIN:
         {
             _codegen.kl_generated.append(_append);

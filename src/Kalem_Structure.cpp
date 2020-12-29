@@ -39,7 +39,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 {
                     /* #import */    
                     if(_tokens[i] == _KALEM_IMPORT) {
-                        __codegen.Kl_Codegen(KALEM_IMPORT, _tokens[i + 1]);
+                        __codegen.Kl_Codegen(KALEM_IMPORT, "", _tokens[i + 1]);
                     }
                 
                     break;
@@ -53,9 +53,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
                             Create checkINT() function 
                         */
 
-                        __codegen.Kl_Codegen(KALEM_MAIN, _tokens[i + 1]);
+                        __codegen.Kl_Codegen(KALEM_MAIN, "", _tokens[i + 1]);
                     } else if(_tokens[i] == _KALEM_RETURN) {
-                        __codegen.Kl_Codegen(KALEM_RETURN, _tokens[i + 1]);
+                        __codegen.Kl_Codegen(KALEM_RETURN, "", _tokens[i + 1]);
                     } else if(_tokens[i] == _KALEM_PRINT) {
                         if(_tokens[i + 1][0] == '"') {
                             std::string _str_data;
@@ -71,9 +71,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 }
                             }
                             
-                             __codegen.Kl_Codegen(KALEM_PRINT, _str_data);
+                             __codegen.Kl_Codegen(KALEM_PRINT, "", _str_data);
                         } else {
-                            __codegen.Kl_Codegen(KALEM_PRINT, _tokens[i + 1]);
+                            __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1]);
                         }
                     }
                     
@@ -91,20 +91,49 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 
                 case '{':
                 {
-                    __codegen.Kl_Codegen(KALEM_LEFT_CURLY_BRACKET, "");
+                    __codegen.Kl_Codegen(KALEM_LEFT_CURLY_BRACKET, "", "");
                     break;
                 }
                 
                 case '}':
                 {
-                    __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "");
+                    __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "");
+                    break;
+                }
+
+                default:
+                {
+                    /* string test = "kalem" */
+                    if(_tokens[i] == _KALEM_STRING) {
+                        if(_tokens[i + 2][0] == '=') {
+                            if(_tokens[i + 3][0] == '"') {
+                                std::string _str_data;
+
+                                for(unsigned f = i+1;;) {
+                                    _str_data.append(_tokens[f]);
+
+                                    if(_tokens[f][_tokens[f].length() - 1] == '"') {
+                                        break;
+                                    } else {
+                                        _str_data.append(" ");
+                                        f++;
+                                    }
+                                }
+
+                                 __codegen.Kl_Codegen(KALEM_STRING, "", _str_data);
+                            } else {
+                                /* Syntax error (string x =)*/
+                            }
+                        }
+                    }
+
                     break;
                 }
             }
                 
          } 
          
-         __codegen.Kl_Codegen(KALEM_NEWLINE, "");
+         __codegen.Kl_Codegen(KALEM_NEWLINE, "", "");
     }
     
     return __codegen._codegen;

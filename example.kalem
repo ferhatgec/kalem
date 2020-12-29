@@ -1,7 +1,8 @@
 #import <iostream>
 
 @main int {
-	@print "Hello, Kalem!\n"
+	string test = "Hello, Kalem!\n"
+	@print test
 	@return 0
 }
 
