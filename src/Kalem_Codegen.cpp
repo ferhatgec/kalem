@@ -70,6 +70,33 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
+        case KALEM_FUNCTION:
+        {
+            /* @test void { }*/
+            _codegen.kl_generated.append(_variable);
+            _codegen.kl_generated.append(" ");
+
+            _append = _append.erase(0, 1);
+
+            _codegen.kl_generated.append(_append);
+
+            /* arguments are not supported */
+            _codegen.kl_generated.append("()");
+
+            break;
+        }
+
+        case KALEM_FUNCTION_CALL:
+        {
+            /* @test */
+            _append = _append.erase(0, 1);
+
+            _codegen.kl_generated.append(_append);
+            _codegen.kl_generated.append("();");
+
+            break;
+        }
+
         case KALEM_MAIN:
         {
             _codegen.kl_generated.append(_append);
@@ -78,7 +105,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             
             break;
         }
-        
+
         case KALEM_RETURN:
         {
             _codegen.kl_generated.append(_CPP_KALEM_RETURN);

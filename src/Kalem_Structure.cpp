@@ -29,13 +29,16 @@ KalemStructure::ReadSource(kalem_t kalem) {
 
     bool is_argument = false;
 
+    int vect_size;
+
     /* #import */
     while(std::getline(_source, _data)) {
          _tokens = MakeTokenizable(_data);
-         
+          vect_size = std::ssize(_tokens);
+
          for(int i = 0; i < _tokens.size(); i++) {
             _tokens[i] = stringtools::ltrim(_tokens[i]);
-            
+
             switch(_tokens[i][0]) {
                 case '#':
                 {
@@ -49,6 +52,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 
                 case '@':
                 {
+
                     /* @main int */
                     if(_tokens[i] == _KALEM_MAIN) {
                         /* TODO:
@@ -77,6 +81,20 @@ KalemStructure::ReadSource(kalem_t kalem) {
                              __codegen.Kl_Codegen(KALEM_PRINT, "", _str_data);
                         } else {
                             __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1]);
+                        }
+                    } else {
+                        if(i + 2 < vect_size) {
+                            if(_tokens[i + 2][0] == '{') {
+                                if(is_argument == false) {
+                                    __codegen.Kl_Codegen(KALEM_FUNCTION, _tokens[i + 1], _tokens[i]);
+                                }
+                            } else {
+                                /* Function call */
+                                __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i]);
+                            }
+                        } else {
+                            /* Function call */
+                            __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i]);
                         }
                     }
                     

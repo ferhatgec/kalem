@@ -1,7 +1,9 @@
 #import <iostream>
 #import <string>
 
-
+@my_function void {
+	@print "Hi, from Kalem!\n"
+}
 
 @main int {
 	string test = "Hello, Kalem!\n"
@@ -20,6 +22,7 @@
 
 	@print "\n"
 
+	@my_function
 
 	@return 0
 }
