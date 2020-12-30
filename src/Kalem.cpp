@@ -60,6 +60,13 @@ int main(int argc, char** argv) {
     
     kl_codegen __codegen_ = _structure.ReadSource(_main);
     
+    if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
+        + "/"
+        + kl_source_file
+        + ".cpp")) {
+        _exec.RunFunction("rm -f " + kl_source_file + ".cpp");
+    }
+
     fsplusplus::CreateFile(kl_source_file + ".cpp", __codegen_.kl_generated);
     
     _exec.RunFunction("clang++ -std=c++17 " + kl_source_file + ".cpp -o " + kl_source_file);
