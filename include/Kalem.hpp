@@ -12,8 +12,11 @@
 #include <iostream>
 #include <string>
 
-#define _KALEM_INT    "int"
-#define _KALEM_STRING "string"
+#define _KALEM_INT      "int"
+#define _KALEM_UNSIGNED "unsign"
+#define _KALEM_STRING   "string"
+#define _KALEM_CHAR     "char"
+
 #define _KALEM_IMPORT "#import"
 #define _KALEM_MAIN   "@main"
 #define _KALEM_RETURN "@return"
@@ -24,6 +27,8 @@
 
 #define _KALEM_NEWLINE "\n"
 
+#define _CPP_KALEM_UNSIGNED "unsigned"
+
 #define _CPP_KALEM_INCLUDE "#include"
 #define _CPP_KALEM_STRING "std::string"
 #define _CPP_KALEM_MAIN "main()"
@@ -32,6 +37,7 @@
 
 enum KALEM_TOKEN {
 	KALEM_INT = 1,
+	KALEM_UNSIGNED,
 	KALEM_STRING,
 	KALEM_IMPORT,
 	KALEM_MAIN,

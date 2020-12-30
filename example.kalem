@@ -1,7 +1,25 @@
 #import <iostream>
+#import <string>
+
+
 
 @main int {
 	string test = "Hello, Kalem!\n"
+
+	int _test = 10
+	unsign _test_ = 20
+
+	@print "String: "
 	@print test
+
+	@print "\nInteger: "
+	@print _test
+
+	@print "\nUnsigned Integer: "
+	@print _test_
+
+	@print "\n"
+
+
 	@return 0
 }

@@ -27,6 +27,8 @@ KalemStructure::ReadSource(kalem_t kalem) {
         
     Kalem_Codegen __codegen;
 
+    bool is_argument = false;
+
     /* #import */
     while(std::getline(_source, _data)) {
          _tokens = MakeTokenizable(_data);
@@ -54,6 +56,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         */
 
                         __codegen.Kl_Codegen(KALEM_MAIN, "", _tokens[i + 1]);
+                        is_argument = true;
                     } else if(_tokens[i] == _KALEM_RETURN) {
                         __codegen.Kl_Codegen(KALEM_RETURN, "", _tokens[i + 1]);
                     } else if(_tokens[i] == _KALEM_PRINT) {
@@ -124,6 +127,20 @@ KalemStructure::ReadSource(kalem_t kalem) {
                             } else {
                                 /* Syntax error (string x =)*/
                             }
+                        }
+                    } else if(_tokens[i] == _KALEM_UNSIGNED
+                        || _tokens[i] == _KALEM_INT) {
+
+                        /* unsign test = 10; */
+                        if(is_argument == true) {
+                            is_argument = false;
+                            break;
+                        } else if(_tokens[i + 2][0] == '=') {
+                            __codegen.Kl_Codegen((_tokens[i] == _KALEM_INT)
+                                ? KALEM_INT
+                                : KALEM_UNSIGNED, _tokens[i + 1], _tokens[i + 3]);
+                        } else {
+
                         }
                     }
 
