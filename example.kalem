@@ -1,6 +1,8 @@
 #import <iostream>
 #import <string>
 
+#defn TEST "Hi, preprocessor!\n"
+
 @my_function void {
 	@print "Hi, from Kalem!\n"
 }
@@ -23,6 +25,8 @@
 	@print "\n"
 
 	@my_function
+
+	@print TEST
 
 	@return 0
 }

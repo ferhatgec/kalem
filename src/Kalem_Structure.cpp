@@ -45,6 +45,25 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     /* #import */    
                     if(_tokens[i] == _KALEM_IMPORT) {
                         __codegen.Kl_Codegen(KALEM_IMPORT, "", _tokens[i + 1]);
+                    } else if(_tokens[i] == _KALEM_DEFINE) {
+                        if(_tokens[i + 2][0] == '"') {
+                            std::string _str_data;
+
+                            for(unsigned f = i + 2;;) {
+                                _str_data.append(_tokens[f]);
+
+                                if(_tokens[f][_tokens[f].length() - 1] == '"') {
+                                    break;
+                                } else {
+                                    _str_data.append(" ");
+                                    f++;
+                                }
+                            }
+
+                             __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _str_data);
+                        } else {
+                            __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _tokens[i + 2]);
+                        }
                     }
                 
                     break;

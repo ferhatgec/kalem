@@ -21,6 +21,7 @@
 #define _KALEM_MAIN   "@main"
 #define _KALEM_RETURN "@return"
 #define _KALEM_PRINT  "@print"
+#define _KALEM_DEFINE "#defn"
 
 #define _KALEM_VOID   "void"
 
@@ -36,6 +37,7 @@
 #define _CPP_KALEM_MAIN "main()"
 #define _CPP_KALEM_RETURN "return"
 #define _CPP_KALEM_PRINT "std::cout"
+#define _CPP_KALEM_DEFINE "#define"
 
 enum KALEM_TOKEN {
 	KALEM_INT = 1,
@@ -47,7 +49,8 @@ enum KALEM_TOKEN {
 	KALEM_PRINT,
 	KALEM_FUNCTION,
 	KALEM_FUNCTION_CALL,
-	
+	KALEM_DEFINE,
+
 	KALEM_LEFT_CURLY_BRACKET,
 	KALEM_RIGHT_CURLY_BRACKET,
 	
