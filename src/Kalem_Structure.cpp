@@ -105,8 +105,12 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     } else {
                         if(i + 2 < vect_size) {
                             if(_tokens[i + 2][0] == '{') {
-                                if(is_argument == false) {
-                                    __codegen.Kl_Codegen(KALEM_FUNCTION, _tokens[i + 1], _tokens[i], "");
+                                if(is_argument == false && is_main == false) {
+                                    if(_tokens[i + 1] == _KALEM_NAMESPACE) {
+                                        __codegen.Kl_Codegen(KALEM_NAMESPACE, _tokens[i + 1], _tokens[i], "");
+                                    } else {
+                                        __codegen.Kl_Codegen(KALEM_FUNCTION, _tokens[i + 1], _tokens[i], "");
+                                    }
                                 }
                             } else {
                                 std::string arguments, function_name, __data;

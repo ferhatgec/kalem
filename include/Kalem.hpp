@@ -22,6 +22,8 @@
 #define _KALEM_RETURN "@return"
 #define _KALEM_PRINT  "@print"
 #define _KALEM_DEFINE "#defn"
+#define _KALEM_NAMESPACE "namespace"
+
 
 #define _KALEM_VOID   "void"
 
@@ -50,6 +52,7 @@ enum KALEM_TOKEN {
 	KALEM_FUNCTION,
 	KALEM_FUNCTION_CALL,
 	KALEM_DEFINE,
+	KALEM_NAMESPACE,
 
 	KALEM_LEFT_CURLY_BRACKET,
 	KALEM_RIGHT_CURLY_BRACKET,

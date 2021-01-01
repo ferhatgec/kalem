@@ -1,6 +1,14 @@
 #import <iostream>
 #import <string>
 
+@my_namespace namespace {
+@another_my_function(string test) void {
+@print "Hi, "
+@print test
+@print "!\n"
+}
+}
+
 @my_function(string name) void {
     @print name
 }
