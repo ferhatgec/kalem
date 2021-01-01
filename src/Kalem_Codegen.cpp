@@ -147,6 +147,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             _codegen.kl_generated.append(_append);
             _codegen.kl_generated.append(" ");
             _codegen.kl_generated.append(_CPP_KALEM_MAIN);
+            _codegen.kl_generated.append("(int argc, char** argv)");
             
             break;
         }

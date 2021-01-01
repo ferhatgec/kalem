@@ -36,7 +36,7 @@
 
 #define _CPP_KALEM_INCLUDE "#include"
 #define _CPP_KALEM_STRING "std::string"
-#define _CPP_KALEM_MAIN "main()"
+#define _CPP_KALEM_MAIN "main"
 #define _CPP_KALEM_RETURN "return"
 #define _CPP_KALEM_PRINT "std::cout"
 #define _CPP_KALEM_DEFINE "#define"

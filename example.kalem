@@ -5,7 +5,6 @@
     @another_my_function(string test) void {
         @print "Hi, "
         @print test
-        @print "!\n"
     }
 }
 
@@ -42,6 +41,13 @@
 
     #/* You can use directly C++ & C code with # token like this too.  */
     #my_namespace::another_my_function("Hi, C++!\n");
-
+	
+    @print "argc: "
+    @print argc
+    
+    @print "\nargv[argc]: "
+    @print argv[argc-1]
+    @print "\n"
+    
     @return 0
 }
