@@ -13,8 +13,11 @@
 
 #include "../include/Kalem_Codegen.hpp"
 
+#include "../include/libs/StringTools.hpp"
+
 void
-Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string _append) {
+Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string _append,
+    std::string _arguments) {
     switch(_token) {
         case KALEM_IMPORT:
         {
@@ -80,8 +83,17 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
 
             _codegen.kl_generated.append(_append);
 
-            /* arguments are not supported */
-            _codegen.kl_generated.append("()");
+
+            _codegen.kl_generated.append("(");
+
+            if(_arguments != "") {
+                stringtools::replaceAll(_arguments, "string ", "std::string ");
+                stringtools::replaceAll(_arguments, "unsign ", "unsigned ");
+
+                _codegen.kl_generated.append(_arguments);
+            }
+
+            _codegen.kl_generated.append(")");
 
             break;
         }
@@ -92,7 +104,17 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             _append = _append.erase(0, 1);
 
             _codegen.kl_generated.append(_append);
-            _codegen.kl_generated.append("();");
+
+            if(_arguments != "") {
+                _codegen.kl_generated.append("(" + _arguments + ");");
+            } else {
+                if(stringtools::Find(_append, "()")) {
+                    _codegen.kl_generated.append(";");
+                } else {
+                    _codegen.kl_generated.append("();");
+                }
+            }
+
 
             break;
         }

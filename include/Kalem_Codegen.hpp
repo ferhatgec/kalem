@@ -23,7 +23,8 @@ class Kalem_Codegen {
 public:
 	kl_codegen _codegen;
 		
-	void Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string _append);
+	void Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string _append,
+		std::string _arguments);
 };
 
 #endif // KALEM_CODEGEN_HPP

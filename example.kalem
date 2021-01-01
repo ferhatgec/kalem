@@ -1,32 +1,36 @@
 #import <iostream>
 #import <string>
 
-#defn TEST "Hi, preprocessor!\n"
+@my_function(string name) void {
+    @print name
+}
 
-@my_function void {
-	@print "Hi, from Kalem!\n"
+@my_test_function void {
+    @print "Test\n"
 }
 
 @main int {
-	string test = "Hello, Kalem!\n"
+    string test = "Hello, Kalem!\n"
 
-	int _test = 10
-	unsign _test_ = 20
+    int _test = 10
+    unsign _test_ = 20
 
-	@print "String: "
-	@print test
+    @print "String: "
+    @print test
 
-	@print "\nInteger: "
-	@print _test
+    @print "\nInteger: "
+    @print _test
 
-	@print "\nUnsigned Integer: "
-	@print _test_
+    @print "\nUnsigned Integer: "
+    @print _test_
 
-	@print "\n"
+    @print "\n"
 
-	@my_function
+    @my_function("Hi, from Kalem!\n")
 
-	@print TEST
+    @my_test_function
 
-	@return 0
+    @my_test_function()
+
+    @return 0
 }

@@ -27,7 +27,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
         
     Kalem_Codegen __codegen;
 
-    bool is_argument = false;
+    bool is_argument = false, is_main = false;
 
     int vect_size;
 
@@ -44,7 +44,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 {
                     /* #import */    
                     if(_tokens[i] == _KALEM_IMPORT) {
-                        __codegen.Kl_Codegen(KALEM_IMPORT, "", _tokens[i + 1]);
+                        __codegen.Kl_Codegen(KALEM_IMPORT, "", _tokens[i + 1], "");
                     } else if(_tokens[i] == _KALEM_DEFINE) {
                         if(_tokens[i + 2][0] == '"') {
                             std::string _str_data;
@@ -60,9 +60,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 }
                             }
 
-                             __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _str_data);
+                             __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _str_data, "");
                         } else {
-                            __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _tokens[i + 2]);
+                            __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _tokens[i + 2], "");
                         }
                     }
                 
@@ -78,10 +78,11 @@ KalemStructure::ReadSource(kalem_t kalem) {
                             Create checkINT() function 
                         */
 
-                        __codegen.Kl_Codegen(KALEM_MAIN, "", _tokens[i + 1]);
+                        __codegen.Kl_Codegen(KALEM_MAIN, "", _tokens[i + 1], "");
                         is_argument = true;
+                        is_main     = true;
                     } else if(_tokens[i] == _KALEM_RETURN) {
-                        __codegen.Kl_Codegen(KALEM_RETURN, "", _tokens[i + 1]);
+                        __codegen.Kl_Codegen(KALEM_RETURN, "", _tokens[i + 1], "");
                     } else if(_tokens[i] == _KALEM_PRINT) {
                         if(_tokens[i + 1][0] == '"') {
                             std::string _str_data;
@@ -97,23 +98,65 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 }
                             }
                             
-                             __codegen.Kl_Codegen(KALEM_PRINT, "", _str_data);
+                             __codegen.Kl_Codegen(KALEM_PRINT, "", _str_data, "");
                         } else {
-                            __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1]);
+                            __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1], "");
                         }
                     } else {
                         if(i + 2 < vect_size) {
                             if(_tokens[i + 2][0] == '{') {
                                 if(is_argument == false) {
-                                    __codegen.Kl_Codegen(KALEM_FUNCTION, _tokens[i + 1], _tokens[i]);
+                                    __codegen.Kl_Codegen(KALEM_FUNCTION, _tokens[i + 1], _tokens[i], "");
                                 }
                             } else {
-                                /* Function call */
-                                __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i]);
+                                std::string arguments, function_name, __data;
+                                arguments = stringtools::GetBetweenString(_data, "(", ")");
+
+                                if(arguments != "error" && is_main == false) {
+                                    for(unsigned q = 0; _tokens[i][q] != '('; q++) {
+                                        function_name.push_back((char)_tokens[i][q]);
+                                    }
+
+                                    __data = stringtools::EraseAllSubString(_data,
+                                        function_name + "(" + arguments + ") ");
+
+                                    __data = (MakeTokenizable(__data)[0]);
+
+                                    __codegen.Kl_Codegen(KALEM_FUNCTION, __data, function_name, arguments);
+                                } else {
+                                    std::string function_name, arguments, __data;
+
+                                    for(unsigned q = 0; _tokens[i][q] != '('; q++) {
+                                        function_name.push_back((char)_tokens[i][q]);
+                                    }
+
+                                    __data = stringtools::GetBetweenString(_data, function_name + "(", ")");
+
+                                    if(__data != "error") {
+                                        /* Function call with arguments*/
+                                        __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", function_name, __data);
+                                    } else {
+                                        /* Function call without arguments */
+                                        __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", function_name, "");
+                                    }
+                                }
                             }
                         } else {
-                            /* Function call */
-                            __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i]);
+                            std::string function_name, arguments, __data;
+
+                            for(unsigned q = 0; _tokens[i][q] != '('; q++) {
+                                function_name.push_back((char)_tokens[i][q]);
+                            }
+
+                            __data = stringtools::GetBetweenString(_data, function_name + "(", ")");
+
+                            if(__data != "error") {
+                                /* Function call with arguments*/
+                                __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i], __data);
+                            } else {
+                                /* Function call without arguments */
+                                __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i], "");
+                            }
                         }
                     }
                     
@@ -131,13 +174,13 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 
                 case '{':
                 {
-                    __codegen.Kl_Codegen(KALEM_LEFT_CURLY_BRACKET, "", "");
+                    __codegen.Kl_Codegen(KALEM_LEFT_CURLY_BRACKET, "", "", "");
                     break;
                 }
                 
                 case '}':
                 {
-                    __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "");
+                    __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
                     break;
                 }
 
@@ -160,7 +203,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     }
                                 }
 
-                                 __codegen.Kl_Codegen(KALEM_STRING, "", _str_data);
+                                 __codegen.Kl_Codegen(KALEM_STRING, "", _str_data, "");
                             } else {
                                 /* Syntax error (string x =)*/
                             }
@@ -175,7 +218,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         } else if(_tokens[i + 2][0] == '=') {
                             __codegen.Kl_Codegen((_tokens[i] == _KALEM_INT)
                                 ? KALEM_INT
-                                : KALEM_UNSIGNED, _tokens[i + 1], _tokens[i + 3]);
+                                : KALEM_UNSIGNED, _tokens[i + 1], _tokens[i + 3], "");
                         } else {
 
                         }
@@ -187,7 +230,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 
          } 
          
-         __codegen.Kl_Codegen(KALEM_NEWLINE, "", "");
+         __codegen.Kl_Codegen(KALEM_NEWLINE, "", "", "");
     }
     
     return __codegen._codegen;
