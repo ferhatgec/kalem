@@ -33,12 +33,12 @@ KalemStructure::ReadSource(kalem_t kalem) {
 
     /* #import */
     while(std::getline(_source, _data)) {
+         _data = stringtools::ltrim(_data);
+
          _tokens = MakeTokenizable(_data);
-          vect_size = std::ssize(_tokens);
+         vect_size = std::ssize(_tokens);
 
          for(int i = 0; i < _tokens.size(); i++) {
-            _tokens[i] = stringtools::ltrim(_tokens[i]);
-
             switch(_tokens[i][0]) {
                 case '#':
                 {
