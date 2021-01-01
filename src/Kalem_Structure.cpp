@@ -61,9 +61,12 @@ KalemStructure::ReadSource(kalem_t kalem) {
                             }
 
                              __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _str_data, "");
-                        } else {
-                            __codegen.Kl_Codegen(KALEM_DEFINE, _tokens[i + 1], _tokens[i + 2], "");
                         }
+                    } else {
+                        /* To directly use C++ & C code */
+                        __codegen.Kl_Codegen(KALEM_LINK, _data, "", "");
+
+                        break;
                     }
                 
                     break;
@@ -166,7 +169,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     
                     break;
                 }
-                
+
                 case '/':
                 {
                     if(_tokens[i][1] == '/') {

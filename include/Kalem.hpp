@@ -58,6 +58,7 @@ enum KALEM_TOKEN {
 	KALEM_RIGHT_CURLY_BRACKET,
 	
 	KALEM_NEWLINE,
+	KALEM_LINK,
 };
 
 typedef struct {
