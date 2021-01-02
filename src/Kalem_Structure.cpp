@@ -32,7 +32,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
     int vect_size;
 
     /* #import */
-    while(std::getline(_source, _data)) {
+    retry:while(std::getline(_source, _data)) {
          _data = stringtools::ltrim(_data);
 
          _tokens = MakeTokenizable(_data);
@@ -66,7 +66,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         /* To directly use C++ & C code */
                         __codegen.Kl_Codegen(KALEM_LINK, _data, "", "");
 
-                        break;
+                        goto retry; 
                     }
                 
                     break;
