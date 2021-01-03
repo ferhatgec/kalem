@@ -42,12 +42,19 @@
     #/* You can use directly C++ & C code with # token like this too.  */
     #my_namespace::another_my_function("Hi, C++!\n");
 	
-    @print "argc: "
+    @test: @print "argc: "
+    
+    #_test++;
+    
     @print argc
     
     @print "\nargv[argc]: "
     @print argv[argc-1]
     @print "\n"
     
+    #if(_test != 12) {
+        @goto test
+    }
+
     @return 0
 }

@@ -1,6 +1,6 @@
 /* MIT License
 #
-# Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+# Copyright (c) 2020-2021 Ferhat Geçdoğan All Rights Reserved.
 # Distributed under the terms of the MIT License.
 #
 # */
@@ -105,7 +105,11 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         } else {
                             __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1], "");
                         }
-                    } else {
+                    } else if(_tokens[i] == _KALEM_GOTO) {
+                        __codegen.Kl_Codegen(KALEM_GOTO, "", _tokens[i + 1], "");
+                    } else if(_tokens[i][_tokens[i].length() - 1] == ':') {
+                        __codegen.Kl_Codegen(KALEM_GOTO_CALL, "", _tokens[i], "");
+                    }  else {
                         if(i + 2 < vect_size) {
                             if(_tokens[i + 2][0] == '{') {
                                 if(is_argument == false && is_main == false) {

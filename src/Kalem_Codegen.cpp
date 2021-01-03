@@ -1,6 +1,6 @@
 /* MIT License
 #
-# Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+# Copyright (c) 2020-2021 Ferhat Geçdoğan All Rights Reserved.
 # Distributed under the terms of the MIT License.
 #
 # */
@@ -171,7 +171,26 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
         
-        
+        case KALEM_GOTO:
+        {
+            /* @goto test */
+            _codegen.kl_generated.append(_CPP_KALEM_GOTO);
+            _codegen.kl_generated.append(" " + _append);
+            _codegen.kl_generated.append(";");
+
+            break;
+        }
+
+        case KALEM_GOTO_CALL:
+        {
+            /* @test: ..... */
+            _append = _append.erase(0, 1);
+
+            _codegen.kl_generated.append(_append);
+
+            break;
+        }
+
         case KALEM_LEFT_CURLY_BRACKET:
         {
             _codegen.kl_generated.append(_KALEM_LEFT_CURLY_BRACKET);
