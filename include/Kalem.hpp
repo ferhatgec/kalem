@@ -28,6 +28,7 @@
 #define _KALEM_IF        "if"
 #define _KALEM_WHILE     "while"
 #define _KALEM_ELSE      "els"
+#define _KALEM_ELSE_IF   "elsif"
 
 #define _KALEM_VOID   "void"
 
@@ -71,6 +72,7 @@ enum KALEM_TOKEN {
 	KALEM_REGULAR,
 
 	KALEM_ELSE,
+	KALEM_ELSE_IF,
 };
 
 typedef struct {

@@ -52,7 +52,10 @@
     @print argv[argc-1]
     @print "\n"
     
-    if (_test != 12) {
+    
+    if (_test == 11) {
+    	@print "Passed [11]\n"
+    } elsif (_test != 12) {
         @goto test
     } els {
     	@print "Passed : "
