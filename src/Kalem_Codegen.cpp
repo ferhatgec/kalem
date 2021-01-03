@@ -88,6 +88,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
 
             if(_arguments != "") {
                 stringtools::replaceAll(_arguments, "string ", "std::string ");
+                stringtools::replaceAll(_arguments, "vect ", "std::vector ");
                 stringtools::replaceAll(_arguments, "unsign ", "unsigned ");
 
                 _codegen.kl_generated.append(_arguments);

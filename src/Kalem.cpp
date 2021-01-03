@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
         kl_output_file = kl_source_file;
     }
     
-    _exec.RunFunction("clang++ -std=c++17 " + kl_source_file + ".cpp -o " + kl_output_file);
+    _exec.RunFunction("clang++ -std=c++17 -lstdc++fs " + kl_source_file + ".cpp -o " + kl_output_file);
 
     if(option == false) {
         _exec.RunFunction("rm -f " + kl_source_file + ".cpp");
