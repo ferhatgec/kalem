@@ -25,6 +25,9 @@
 #define _KALEM_DEFINE    "#defn"
 #define _KALEM_NAMESPACE "namespace"
 
+#define _KALEM_IF        "if"
+#define _KALEM_WHILE     "while"
+#define _KALEM_ELSE      "els"
 
 #define _KALEM_VOID   "void"
 
@@ -42,6 +45,8 @@
 #define _CPP_KALEM_PRINT   "std::cout"
 #define _CPP_KALEM_GOTO    "goto"
 #define _CPP_KALEM_DEFINE  "#define"
+
+#define _CPP_KALEM_ELSE    "else"
 
 enum KALEM_TOKEN {
 	KALEM_INT = 1,
@@ -63,6 +68,9 @@ enum KALEM_TOKEN {
 	
 	KALEM_NEWLINE,
 	KALEM_LINK,
+	KALEM_REGULAR,
+
+	KALEM_ELSE,
 };
 
 typedef struct {

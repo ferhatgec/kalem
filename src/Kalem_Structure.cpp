@@ -233,6 +233,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         } else {
 
                         }
+                    } else if(_tokens[i] == _KALEM_IF || _tokens[i] == _KALEM_WHILE) {
+                        __codegen.Kl_Codegen(KALEM_REGULAR, "", _data.erase(_data.length() - 1, 1), "");
+                    } else if(_tokens[i] == _KALEM_ELSE) {
+                        __codegen.Kl_Codegen(KALEM_ELSE, "", "", "");
                     }
 
                     break;

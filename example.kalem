@@ -52,8 +52,12 @@
     @print argv[argc-1]
     @print "\n"
     
-    #if(_test != 12) {
+    if (_test != 12) {
         @goto test
+    } els {
+    	@print "Passed : "
+    	@print _test
+    	@print "\n"
     }
 
     @return 0

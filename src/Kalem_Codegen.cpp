@@ -221,5 +221,19 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
 
             break;
         }
+
+        case KALEM_ELSE:
+        {
+            _codegen.kl_generated.append(_CPP_KALEM_ELSE);
+            _codegen.kl_generated.append(" ");
+
+            break;
+        }
+
+        case KALEM_REGULAR:
+        {
+            _codegen.kl_generated.append(_append);
+            break;
+        }
     }
 }
