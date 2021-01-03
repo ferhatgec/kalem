@@ -238,7 +238,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     } else if(_tokens[i] == _KALEM_ELSE) {
                         __codegen.Kl_Codegen(KALEM_ELSE, "", "", "");
                     } else if(_tokens[i] == _KALEM_ELSE_IF) {
-                        __codegen.Kl_Codegen(KALEM_ELSE_IF, "", stringtools::GetBetweenString(_data, "(", ")"), "");
+                        __codegen.Kl_Codegen(KALEM_ELSE_IF, "", stringtools::GetBetweenString(_data, "(", ") {"), "");
                     }
 
                     break;
