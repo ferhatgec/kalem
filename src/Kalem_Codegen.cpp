@@ -22,6 +22,15 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
         case KALEM_IMPORT:
         {
             _codegen.kl_generated.append(_CPP_KALEM_INCLUDE);
+
+            stringtools::replaceAll(_append, "ios"    , "iostream");
+            stringtools::replaceAll(_append, "vect"   , "vector");
+            stringtools::replaceAll(_append, "stdstr" , "string");
+            stringtools::replaceAll(_append, "cstdstr", "cstring");
+            stringtools::replaceAll(_append, "iom"    , "iomanip");
+            stringtools::replaceAll(_append, "filesys", "filesystem");
+            stringtools::replaceAll(_append, "fst"    , "fstream");
+
             _codegen.kl_generated.append(_append);
             
             break;

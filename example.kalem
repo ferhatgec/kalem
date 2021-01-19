@@ -1,5 +1,5 @@
-#import <iostream>
-#import <string>
+#import <ios>
+#import <stdstr>
 
 @my_namespace namespace {
     @another_my_function(string test) void {
