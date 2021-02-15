@@ -263,6 +263,36 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
+        // TODO: Create Kalem_Flags.hpp & Kalem_Flags.cpp
+        // for all supported flags.
+        case KALEM_FLAG:
+        {
+            // C++ compiler standard !flag("cpp-standard=c++17")
+            // Kalem output file     !flag("output=test")
+            _append = stringtools::GetBetweenString(_variable, "(", ")");
+
+            std::string flag, append_flag;
+
+            unsigned i = 1;
+
+            for(; _append[i] != '='; i++) {
+                flag.push_back(_append[i]);
+            }
+
+            for(++i; _append[i] != '"'; i++) {
+                append_flag.push_back(_append[i]);
+            }
+
+            if(flag == "output") {
+                _codegen.kl_output = append_flag;
+            }
+            else if(flag == "cpp-standard") {
+                _codegen.kl_cpp_standard = append_flag;
+            }
+
+            break;
+        }
+
         case KALEM_REGULAR:
         {
             _codegen.kl_generated.append(_append);

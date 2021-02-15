@@ -1,6 +1,10 @@
 #import <ios>
 #import <stdstr>
 
+// Some of Kalem's runtime flags.
+!flag("output=testikebabi")
+!flag("cpp-standard=c++2a")
+
 @my_namespace namespace {
     @another_my_function(string test) void {
         @print "Hi, "

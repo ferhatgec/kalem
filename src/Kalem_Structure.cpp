@@ -195,6 +195,12 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     break;
                 }
 
+                case '!':
+                {
+                    __codegen.Kl_Codegen(KALEM_FLAG, _data, "", "");
+                    break;
+                }
+
                 default:
                 {
                     /* string test = "kalem" */

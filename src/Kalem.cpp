@@ -84,8 +84,17 @@ int main(int argc, char** argv) {
     if(kl_output_file == "") {
         kl_output_file = kl_source_file;
     }
-    
-    _exec.RunFunction("clang++ -std=c++17 -lstdc++fs " + kl_source_file + ".cpp -o " + kl_output_file);
+
+    if(__codegen_.kl_output != "") {
+        kl_output_file = __codegen_.kl_output;
+    }
+
+    // TODO: Create !flag("stdflag=...")
+    _exec.RunFunction("clang++ -std="
+        + __codegen_.kl_cpp_standard
+        + " -lstdc++fs "
+        + kl_source_file
+        + ".cpp -o " + kl_output_file);
 
     if(option == false) {
         _exec.RunFunction("rm -f " + kl_source_file + ".cpp");

@@ -24,6 +24,7 @@
 #define _KALEM_GOTO      "@goto"
 #define _KALEM_DEFINE    "#defn"
 #define _KALEM_NAMESPACE "namespace"
+#define _KALEM_FLAG      "!flag"
 
 #define _KALEM_IF        "if"
 #define _KALEM_WHILE     "while"
@@ -49,6 +50,10 @@
 
 #define _CPP_KALEM_ELSE    "else"
 
+enum KALEM_FLAG {
+    KALEM_OUTPUT = 1
+};
+
 enum KALEM_TOKEN {
 	KALEM_INT = 1,
 	KALEM_UNSIGNED,
@@ -63,6 +68,7 @@ enum KALEM_TOKEN {
 	KALEM_FUNCTION_CALL,
 	KALEM_DEFINE,
 	KALEM_NAMESPACE,
+    KALEM_FLAG,
 
 	KALEM_LEFT_CURLY_BRACKET,
 	KALEM_RIGHT_CURLY_BRACKET,
@@ -72,7 +78,7 @@ enum KALEM_TOKEN {
 	KALEM_REGULAR,
 
 	KALEM_ELSE,
-	KALEM_ELSE_IF,
+	KALEM_ELSE_IF
 };
 
 typedef struct {
