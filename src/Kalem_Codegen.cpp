@@ -263,6 +263,19 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
+        case KALEM_LOOP:
+        {
+            /* loop {
+             * ...
+             * }
+             * */
+
+            _codegen.kl_generated.append(_CPP_KALEM_LOOP);
+            _codegen.kl_generated.append("(1)");
+
+            break;
+        }
+
         // TODO: Create Kalem_Flags.hpp & Kalem_Flags.cpp
         // for all supported flags.
         case KALEM_FLAG:

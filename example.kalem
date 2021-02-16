@@ -55,7 +55,7 @@
     @print "\nargv[argc]: "
     @print argv[argc-1]
     @print "\n"
-    
+
     
     if (_test == 11) {
     	@print "Passed [11]\n"
@@ -65,6 +65,17 @@
     	@print "Passed : "
     	@print _test
     	@print "\n"
+    }
+
+    int i = 0
+
+    loop {
+        @print "Hello, world!\n"
+        #i++;
+
+        if (i == 2) {
+            #break;
+        }
     }
 
     @return 0

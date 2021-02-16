@@ -25,6 +25,7 @@
 #define _KALEM_DEFINE    "#defn"
 #define _KALEM_NAMESPACE "namespace"
 #define _KALEM_FLAG      "!flag"
+#define _KALEM_LOOP      "loop"
 
 #define _KALEM_IF        "if"
 #define _KALEM_WHILE     "while"
@@ -47,6 +48,7 @@
 #define _CPP_KALEM_PRINT   "std::cout"
 #define _CPP_KALEM_GOTO    "goto"
 #define _CPP_KALEM_DEFINE  "#define"
+#define _CPP_KALEM_LOOP    "while"
 
 #define _CPP_KALEM_ELSE    "else"
 
@@ -69,6 +71,7 @@ enum KALEM_TOKEN {
 	KALEM_DEFINE,
 	KALEM_NAMESPACE,
     KALEM_FLAG,
+    KALEM_LOOP,
 
 	KALEM_LEFT_CURLY_BRACKET,
 	KALEM_RIGHT_CURLY_BRACKET,
