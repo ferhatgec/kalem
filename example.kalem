@@ -47,8 +47,8 @@
     #my_namespace::another_my_function("Hi, C++!\n");
 	
     @test: @print "argc: "
-    
-    #_test++;
+
+    ++_test
     
     @print argc
     
@@ -71,7 +71,7 @@
 
     loop {
         @print "Hello, world!\n"
-        #i++;
+        i++
 
         if (i == 2) {
             break

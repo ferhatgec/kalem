@@ -86,7 +86,9 @@ enum KALEM_TOKEN {
 	KALEM_REGULAR,
 
 	KALEM_ELSE,
-	KALEM_ELSE_IF
+	KALEM_ELSE_IF,
+
+	KALEM_NONE
 };
 
 typedef struct {

@@ -251,6 +251,13 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         __codegen.Kl_Codegen(KALEM_BREAK, "", "", "");
                     } else if(_tokens[i] == _KALEM_CONTINUE) {
                         __codegen.Kl_Codegen(KALEM_CONTINUE, "", "", "");
+                    } else if((_tokens[i][_tokens[i].length() - 1] == '+'
+                            && _tokens[i][_tokens[i].length() - 2] == '+')
+                        || (_tokens[i][_tokens[i].length() - 1] == '-'
+                            && _tokens[i][_tokens[i].length() - 2] == '-')
+                        || (_tokens[i][0] == '+' && _tokens[i][1] == '+')
+                        || (_tokens[i][0] == '-' && _tokens[i][1] == '-')) {
+                        __codegen.Kl_Codegen(KALEM_NONE, _data, "", "");
                     }
 
                     break;
