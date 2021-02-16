@@ -302,6 +302,13 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             else if(flag == "cpp-standard") {
                 _codegen.kl_cpp_standard = append_flag;
             }
+            else if(flag == "cpp-output") {
+                if(append_flag == "true") {
+                    _codegen.kl_cpp_output = true;
+                } else {
+                    _codegen.kl_cpp_output = false;
+                }
+            }
 
             break;
         }

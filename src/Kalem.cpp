@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
         + kl_source_file
         + ".cpp -o " + kl_output_file);
 
-    if(option == false) {
+    if(option == false && __codegen_.kl_cpp_output == false) {
         _exec.RunFunction("rm -f " + kl_source_file + ".cpp");
     }
     
