@@ -26,6 +26,8 @@
 #define _KALEM_NAMESPACE "namespace"
 #define _KALEM_FLAG      "!flag"
 #define _KALEM_LOOP      "loop"
+#define _KALEM_BREAK     "break"
+#define _KALEM_CONTINUE  "continue"
 
 #define _KALEM_IF        "if"
 #define _KALEM_WHILE     "while"
@@ -72,6 +74,9 @@ enum KALEM_TOKEN {
 	KALEM_NAMESPACE,
     KALEM_FLAG,
     KALEM_LOOP,
+
+    KALEM_BREAK,
+    KALEM_CONTINUE,
 
 	KALEM_LEFT_CURLY_BRACKET,
 	KALEM_RIGHT_CURLY_BRACKET,
