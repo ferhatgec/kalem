@@ -36,7 +36,29 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             
             break;
         }
-        
+
+        case KALEM_INCLUDE:
+        {
+            if(_append.length() < 2) break;
+
+            _codegen.kl_generated.append(_CPP_KALEM_INCLUDE);
+
+            if(stringtools::Find(_append, ".kalem"))
+                stringtools::replaceAll(_append, ".kalem", ".hpp");
+            else {
+                char last = _append.back();
+
+                _append.pop_back();
+
+                _append.append(".hpp");
+                _append.push_back(last);
+            }
+
+            _codegen.kl_generated.append(_append);
+
+            break;
+        }
+
         case KALEM_STRING:
         {
             _codegen.kl_generated.append(_CPP_KALEM_STRING);

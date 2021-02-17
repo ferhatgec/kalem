@@ -35,17 +35,32 @@ KalemStructure::ReadSource(kalem_t kalem) {
     retry:while(std::getline(_source, _data)) {
          _data = stringtools::ltrim(_data);
 
+        if(_data[0] == '/' && _data[1] == '/') continue;
+
          _tokens = MakeTokenizable(_data);
          vect_size = std::ssize(_tokens);
 
          for(int i = 0; i < _tokens.size(); i++) {
             switch(_tokens[i][0]) {
+                case '/':
+                {
+                    if(_tokens[i][1] == '/') {
+                        continue;
+                    }
+
+                    break;
+                }
+
                 case '#':
                 {
                     /* #import */    
                     if(_tokens[i] == _KALEM_IMPORT) {
                         __codegen.Kl_Codegen(KALEM_IMPORT, "", _tokens[i + 1], "");
-                    } else if(_tokens[i] == _KALEM_DEFINE) {
+                    }
+                    else if(_tokens[i] == _CPP_KALEM_INCLUDE) {
+                        __codegen.Kl_Codegen(KALEM_INCLUDE, "", _tokens[i + 1], "");
+                    }
+                    else if(_tokens[i] == _KALEM_DEFINE) {
                         if(_tokens[i + 2][0] == '"') {
                             std::string _str_data;
 
@@ -169,15 +184,6 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i], "");
                             }
                         }
-                    }
-                    
-                    break;
-                }
-
-                case '/':
-                {
-                    if(_tokens[i][1] == '/') {
-                        continue;
                     }
                     
                     break;

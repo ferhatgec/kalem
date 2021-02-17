@@ -15,7 +15,9 @@
 !add_source("test")
 
 #import <StringTools.hpp>
-#import <test.kalem>
+
+// import <test.kalem>
+#include <test>
 
 @my_namespace namespace {
     @another_my_function(string test) void {
