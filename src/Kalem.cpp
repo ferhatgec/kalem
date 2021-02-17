@@ -93,21 +93,26 @@ int main(int argc, char** argv) {
     for (auto i = __codegen_.kl_source_files.begin(); i != __codegen_.kl_source_files.end(); ++i) {
         _main = kalem.Init(*i + ".kalem");
 
-        if(hash_checker.HashInit(*i + ".kalem") == false) {
-            temp_codegen = _structure.ReadSource(_main);
 
-            if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
-                                       + "/"
-                                       + *i
-                                       + ".hpp")) {
-                _exec.RunFunction("rm -f " + *i + ".hpp");
+        if(__codegen_.kl_hash_cache == true) {
+            if(hash_checker.HashInit(*i + ".kalem") == true) {
+                std::cout << "Skipped : " + *i + ".kalem\n";
             }
+        }
 
-            fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
+        temp_codegen = _structure.ReadSource(_main);
 
+        if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
+                                   + "/"
+                                   + *i
+                                   + ".hpp")) {
+            _exec.RunFunction("rm -f " + *i + ".hpp");
+        }
+
+        fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
+
+        if(__codegen_.kl_hash_cache == true) {
             hash_checker.HashCreate(*i + ".kalem");
-        } else {
-            std::cout << "Skipped : " + *i + ".kalem\n";
         }
     }
 

@@ -1,6 +1,9 @@
 #import <ios>
 #import <stdstr>
 
+// Disable hash cache checker for test.kalem, etc...
+!flag("hash-cache=false")
+
 // Some of Kalem's runtime flags.
 !flag("output=testikebabi")
 !flag("cpp-standard=c++2a")

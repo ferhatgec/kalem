@@ -28,6 +28,7 @@ public:
     std::vector<std::string> kl_source_files;
 
     bool        kl_cpp_output   = false;
+    bool        kl_hash_cache   = true;
 } kl_codegen;
 
 class Kalem_Codegen {
