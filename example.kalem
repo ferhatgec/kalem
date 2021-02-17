@@ -4,14 +4,18 @@
 // Some of Kalem's runtime flags.
 !flag("output=testikebabi")
 !flag("cpp-standard=c++2a")
-!flag("cpp-output=true")
+!flag("cpp-output=false")
 
 // Its type is not boolean.
 !flag("cpp-flags=false")
 
 !include_dir("./include/libs/")
+!include_dir("./")
+
+!add_source("test")
 
 #import <StringTools.hpp>
+#import <test.kalem>
 
 @my_namespace namespace {
     @another_my_function(string test) void {
@@ -92,6 +96,8 @@
     @print "StringTools: "
     @print test
     @print "\n"
+
+    @my_test
 
     @return 0
 }

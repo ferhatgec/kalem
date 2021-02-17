@@ -30,6 +30,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             stringtools::replaceAll(_append, "iom"    , "iomanip");
             stringtools::replaceAll(_append, "filesys", "filesystem");
             stringtools::replaceAll(_append, "fst"    , "fstream");
+            stringtools::replaceAll(_append, ".kalem", ".hpp");
 
             _codegen.kl_generated.append(_append);
             
@@ -326,6 +327,17 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             if(_append != "false" && _append != "error") {
                 _codegen.kl_cpp_include_dirs.append("-I" + _append + " ");
             } else { _codegen.kl_cpp_include_dirs = ""; }
+
+            break;
+        }
+
+        case KALEM_ADD_SOURCE:
+        {
+            _append = stringtools::GetBetweenString(_variable, "(\"", "\"");
+
+            if(_append != "false" && _append != "error") {
+                _codegen.kl_source_files.push_back(_append);
+            }
 
             break;
         }

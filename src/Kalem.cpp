@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "../include/Kalem.hpp"
 #include "../include/Kalem_Structure.hpp"
@@ -42,7 +43,12 @@ int main(int argc, char** argv) {
     Kalem kalem;
     KalemStructure _structure;
     ExecutePlusPlus _exec;
-    
+
+    kl_codegen __codegen_;
+    kl_codegen temp_codegen;
+
+    kalem_t _main;
+
     bool option = false;
 
     /* kalem test1.kalem test1.kalem */
@@ -57,21 +63,19 @@ int main(int argc, char** argv) {
         option = true;
     }
 
-
     for(auto i = int{1}; i < argc; i++) {
         if(argv[i][0] == '-' && argv[i][1] == 'o' && argv[i][2] == '=') {
             kl_output_file.append(argv[i]);
             kl_output_file = kl_output_file.erase(0, 3);
         }
     }
-    		
-    
+
     kl_source_file = stringtools::EraseAllSubString(kl_source_file, ".kalem");
-    
-    kalem_t _main = kalem.Init(kl_source_file + ".kalem");
-    
-    kl_codegen __codegen_ = _structure.ReadSource(_main);
-    
+
+    _main = kalem.Init(kl_source_file + ".kalem");
+
+    __codegen_ = _structure.ReadSource(_main);
+
     if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
         + "/"
         + kl_source_file
@@ -80,7 +84,22 @@ int main(int argc, char** argv) {
     }
 
     fsplusplus::CreateFile(kl_source_file + ".cpp", __codegen_.kl_generated);
-    
+
+    for (auto i = __codegen_.kl_source_files.begin(); i != __codegen_.kl_source_files.end(); ++i) {
+        _main = kalem.Init(*i + ".kalem");
+
+        temp_codegen = _structure.ReadSource(_main);
+
+        if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
+            + "/"
+            + *i
+            + ".hpp")) {
+            _exec.RunFunction("rm -f " + *i + ".hpp");
+        }
+
+        fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
+    }
+
     if(kl_output_file == "") {
         kl_output_file = kl_source_file;
     }
