@@ -1,0 +1,5 @@
+#import <ios>
+
+@my_test void {
+	@print "Greetings from test.kalem!\n"
+}
