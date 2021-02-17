@@ -4,10 +4,14 @@
 // Some of Kalem's runtime flags.
 !flag("output=testikebabi")
 !flag("cpp-standard=c++2a")
-!flag("cpp-output=false")
+!flag("cpp-output=true")
 
 // Its type is not boolean.
 !flag("cpp-flags=false")
+
+!include_dir("./include/libs/")
+
+#import <StringTools.hpp>
 
 @my_namespace namespace {
     @another_my_function(string test) void {
@@ -25,7 +29,7 @@
 }
 
 @main int {
-    string test = "Hello, Kalem!\n"
+    string test = "[Hello, Kalem!]\n"
 
     int _test = 10
     unsign _test_ = 20
@@ -81,6 +85,13 @@
             break
         }
     }
+
+    // Call C++ namespace directly from Kalem.
+    #test = stringtools::GetBetweenString(test, "[", "]");
+
+    @print "StringTools: "
+    @print test
+    @print "\n"
 
     @return 0
 }

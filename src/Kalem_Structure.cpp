@@ -197,7 +197,12 @@ KalemStructure::ReadSource(kalem_t kalem) {
 
                 case '!':
                 {
-                    __codegen.Kl_Codegen(KALEM_FLAG, _data, "", "");
+                    if(_data[1] == 'f')
+                        __codegen.Kl_Codegen(KALEM_FLAG, _data, "", "");
+                    else if(_data[1] == 'i')
+                        __codegen.Kl_Codegen(KALEM_INCLUDE_DIR, _data, "", "");
+
+
                     break;
                 }
 

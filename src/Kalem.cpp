@@ -90,7 +90,9 @@ int main(int argc, char** argv) {
     }
 
     // TODO: Create !flag("stdflag=...")
-    _exec.RunFunction("clang++ -std="
+    _exec.RunFunction("clang++ "
+        + __codegen_.kl_cpp_include_dirs
+        + " -std="
         + __codegen_.kl_cpp_standard
         + " "
         + __codegen_.kl_cpp_flags
