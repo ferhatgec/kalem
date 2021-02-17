@@ -20,6 +20,7 @@ public:
     std::string kl_output = "";
 
     std::string kl_cpp_standard = "c++17";
+    std::string kl_cpp_flags    = "-lstdc++fs";
 
     bool        kl_cpp_output   = false;
 } kl_codegen;
