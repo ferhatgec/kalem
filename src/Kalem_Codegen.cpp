@@ -337,6 +337,11 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
                     _codegen.kl_cpp_flags = append_flag;
                 }
             }
+            else if(flag == "cpp-compiler") {
+                if(append_flag != "default") {
+                    _codegen.kl_cpp_compiler = append_flag;
+                }
+            }
 
             break;
         }

@@ -6,6 +6,9 @@
 !flag("cpp-standard=c++2a")
 !flag("cpp-output=false")
 
+// default=clang
+!flag("cpp-compiler=default")
+
 // Its type is not boolean.
 !flag("cpp-flags=false")
 
