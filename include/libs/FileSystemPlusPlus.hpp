@@ -373,7 +373,7 @@ namespace fsplusplus {
         	
             readfile.close();
         } else 
-        		std::cout << "Unable to open file\n";
+        		std::cout << "Unable to open file : " << file + "\n";
 		
         return data;
     }

@@ -13,6 +13,7 @@
 #include "../include/Kalem.hpp"
 #include "../include/Kalem_Structure.hpp"
 #include "../include/Kalem_Codegen.hpp"
+#include "../include/Kalem_Hash_Checker.hpp"
 
 #include "../include/libs/FileSystemPlusPlus.hpp"
 #include "../include/libs/ExecutePlusPlus.hpp"
@@ -42,6 +43,8 @@ int main(int argc, char** argv) {
     
     Kalem kalem;
     KalemStructure _structure;
+    KalemHashChecker hash_checker;
+
     ExecutePlusPlus _exec;
 
     kl_codegen __codegen_;
@@ -74,7 +77,9 @@ int main(int argc, char** argv) {
 
     _main = kalem.Init(kl_source_file + ".kalem");
 
-    __codegen_ = _structure.ReadSource(_main);
+    if(hash_checker.HashInit(kl_source_file + ".kalem") == false) {
+        __codegen_ = _structure.ReadSource(_main);
+    }
 
     if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
         + "/"
@@ -88,16 +93,22 @@ int main(int argc, char** argv) {
     for (auto i = __codegen_.kl_source_files.begin(); i != __codegen_.kl_source_files.end(); ++i) {
         _main = kalem.Init(*i + ".kalem");
 
-        temp_codegen = _structure.ReadSource(_main);
+        if(hash_checker.HashInit(*i + ".kalem") == false) {
+            temp_codegen = _structure.ReadSource(_main);
 
-        if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
-            + "/"
-            + *i
-            + ".hpp")) {
-            _exec.RunFunction("rm -f " + *i + ".hpp");
+            if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
+                                       + "/"
+                                       + *i
+                                       + ".hpp")) {
+                _exec.RunFunction("rm -f " + *i + ".hpp");
+            }
+
+            fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
+
+            hash_checker.HashCreate(*i + ".kalem");
+        } else {
+            std::cout << "Skipped : " + *i + ".kalem\n";
         }
-
-        fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
     }
 
     if(kl_output_file == "") {
