@@ -32,11 +32,12 @@ Kalem::Init(std::string kl_file_name) {
 
 int main(int argc, char** argv) {
     if(argc < 2) {
-        std::cout << "Fegeya Kalem compiler\n";
-        std::cout << "Usage: " << argv[0] << " [options] file...\n";
-        std::cout << "Options:\n" <<
-            "--cpp : Output C++ code\n-----" <<
-            "\nkalem file.kalem -o=output_object\n";
+        std::cout << "Fegeya Kalem compiler - "
+                  << KALEM_VERSION
+                  << "\nUsage: " << argv[0] << " [options] file..."
+                  << "\nOptions:"
+                  << "\n--cpp : Output C++ code\n-----"
+                  << "\nkalem file.kalem -o=output_object\n";
         
         return 0;
     }

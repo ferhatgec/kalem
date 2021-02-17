@@ -12,6 +12,8 @@
 #include <iostream>
 #include <string>
 
+#define KALEM_VERSION "0.1-beta-1"
+
 #define _KALEM_INT      "int"
 #define _KALEM_UNSIGNED "unsign"
 #define _KALEM_STRING   "string"
