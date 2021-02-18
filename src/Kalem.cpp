@@ -134,6 +134,8 @@ int main(int argc, char** argv) {
         + " "
         + __codegen_.kl_cpp_flags
         + " "
+        + __codegen_.kl_cpp_sysroot
+        + " "
         + kl_source_file
         + ".cpp -o " + kl_output_file);
 

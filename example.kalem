@@ -8,6 +8,7 @@
 !flag("output=testikebabi")
 !flag("cpp-standard=c++2a")
 !flag("cpp-output=false")
+!flag("cpp-sysroot=false")
 
 // default=clang
 !flag("cpp-compiler=default")
