@@ -30,6 +30,8 @@ public:
 
     bool        kl_cpp_output   = false;
     bool        kl_hash_cache   = true;
+
+    bool        kl_header_file  = false;
 } kl_codegen;
 
 class Kalem_Codegen {

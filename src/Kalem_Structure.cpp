@@ -209,6 +209,8 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         __codegen.Kl_Codegen(KALEM_INCLUDE_DIR, _data, "", "");
                     else if(_data[1] == 'a')
                         __codegen.Kl_Codegen(KALEM_ADD_SOURCE, _data, "", "");
+                    else if(_data[1] == 'r')
+                        __codegen.Kl_Codegen(KALEM_REQUIRED_FLAG, _data, kalem.kl_file_name, "");
 
                     break;
                 }

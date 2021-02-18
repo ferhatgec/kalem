@@ -110,6 +110,10 @@ int main(int argc, char** argv) {
             _exec.RunFunction("rm -f " + *i + ".hpp");
         }
 
+        if(temp_codegen.kl_header_file == true) {
+            temp_codegen.kl_generated.append("\n#endif");
+        }
+
         fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
 
         if(__codegen_.kl_hash_cache == true) {
