@@ -217,11 +217,11 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 {
                     /* string test = "kalem" */
                     if(_tokens[i] == _KALEM_STRING) {
-                        if(_tokens[i + 2][0] == '=') {
-                            if(_tokens[i + 3][0] == '"') {
+                        if(_tokens[i + 2][0] != '=') {
+                            if(_tokens[i + 2][0] == '"') {
                                 std::string _str_data;
 
-                                for(unsigned f = i+1;;) {
+                                for(unsigned f = i + 2;;) {
                                     _str_data.append(_tokens[f]);
 
                                     if(_tokens[f][_tokens[f].length() - 1] == '"') {
@@ -232,24 +232,23 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     }
                                 }
 
-                                 __codegen.Kl_Codegen(KALEM_STRING, "", _str_data, "");
+                                 __codegen.Kl_Codegen(KALEM_STRING, _tokens[i + 1], _str_data, "");
                             } else {
                                 /* Syntax error (string x =)*/
                             }
                         }
                     } else if(_tokens[i] == _KALEM_UNSIGNED
-                        || _tokens[i] == _KALEM_INT) {
+                        || _tokens[i] == _KALEM_INT
+                        || _tokens[i] == _KALEM_CHAR) {
 
                         /* unsign test = 10; */
                         if(is_argument == true) {
                             is_argument = false;
                             break;
-                        } else if(_tokens[i + 2][0] == '=') {
-                            __codegen.Kl_Codegen((_tokens[i] == _KALEM_INT)
-                                ? KALEM_INT
-                                : KALEM_UNSIGNED, _tokens[i + 1], _tokens[i + 3], "");
-                        } else {
-
+                        } else if(_tokens[i + 2][0] != '=') {
+                            if(_tokens[i] == _KALEM_INT)           __codegen.Kl_Codegen(KALEM_INT, _tokens[i + 1], _tokens[i + 2], "");
+                            else if(_tokens[i] == _KALEM_UNSIGNED) __codegen.Kl_Codegen(KALEM_UNSIGNED, _tokens[i + 1], _tokens[i + 2], "");
+                            else if(_tokens[i] == _KALEM_CHAR)     __codegen.Kl_Codegen(KALEM_CHAR, _tokens[i + 1], _tokens[i + 2], "");
                         }
                     } else if(_tokens[i] == _KALEM_IF || _tokens[i] == _KALEM_WHILE) {
                         __codegen.Kl_Codegen(KALEM_REGULAR, "", _data.erase(_data.length() - 1, 1), "");

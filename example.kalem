@@ -42,10 +42,10 @@
 }
 
 @main int {
-    string test = "[Hello, Kalem!]\n"
+    string test "[Hello, Kalem!]\n"
 
-    int _test = 10
-    unsign _test_ = 20
+    int _test 10
+    unsign _test_ 20
 
     @print "String: "
     @print test
@@ -88,7 +88,7 @@
     	@print "\n"
     }
 
-    int i = 0
+    int i 0
 
     loop {
         @print "Hello, world!\n"

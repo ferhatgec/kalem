@@ -65,7 +65,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             _codegen.kl_generated.append(" " + _variable);
 
             if(_append != "") {
-                _codegen.kl_generated.append(_append);
+                _codegen.kl_generated.append(" = " + _append);
             }
 
             _codegen.kl_generated.append(";");
@@ -93,6 +93,22 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
         {
             /* unsign a = 10 */
             _codegen.kl_generated.append(_CPP_KALEM_UNSIGNED);
+            _codegen.kl_generated.append(" " + _variable);
+
+            if(_append != "") {
+                _codegen.kl_generated.append("=");
+                _codegen.kl_generated.append(_append);
+            }
+
+            _codegen.kl_generated.append(";");
+
+            break;
+        }
+
+        case KALEM_CHAR:
+        {
+            // char c 'a'
+            _codegen.kl_generated.append(_KALEM_CHAR);
             _codegen.kl_generated.append(" " + _variable);
 
             if(_append != "") {
