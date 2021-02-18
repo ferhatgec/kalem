@@ -178,7 +178,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
 
                             if(__data != "error") {
                                 /* Function call with arguments*/
-                                __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i], __data);
+                                __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", function_name, __data);
                             } else {
                                 /* Function call without arguments */
                                 __codegen.Kl_Codegen(KALEM_FUNCTION_CALL, "", _tokens[i], "");

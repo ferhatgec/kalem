@@ -64,7 +64,7 @@
     @my_test_function()
 
     #/* You can use directly C++ & C code with # token like this too.  */
-    #my_namespace::another_my_function("Hi, C++!\n");
+    @my_namespace::another_my_function("Hi, C++!\n")
 	
     @test: @print "argc: "
 
