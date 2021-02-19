@@ -27,10 +27,17 @@
 #include <test>
 
 @my_class class {
-#public:
+~public
     @another_my_class_function void {
         @print "Hi from my_class!\n"
+        @print test
+        @print test_protected
     }
+~private
+    string test "Hi from my_class as private member!\n"
+
+~protected
+    string test_protected "Hi from my_class as protected member!\n"
 }
 
 @my_namespace namespace {

@@ -235,6 +235,15 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     break;
                 }
 
+                case '~':
+                {
+                    if(is_class == true) {
+                        __codegen.Kl_Codegen(KALEM_CLASS_MEMBER_VISIBILITY, "", _tokens[i], "");
+                    }
+
+                    break;
+                }
+
                 default:
                 {
                     /* string test = "kalem" */
