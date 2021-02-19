@@ -7,7 +7,7 @@
 // Some of Kalem's runtime flags.
 !flag("output=testikebabi")
 !flag("cpp-standard=c++2a")
-!flag("cpp-output=false")
+!flag("cpp-output=true")
 !flag("cpp-sysroot=false")
 
 // default=clang
@@ -26,6 +26,13 @@
 // import <test.kalem>
 #include <test>
 
+@my_class class {
+#public:
+    @another_my_class_function void {
+        @print "Hi from my_class!\n"
+    }
+}
+
 @my_namespace namespace {
     @another_my_function(string test) void {
         @print "Hi, "
@@ -43,6 +50,9 @@
 
 @main int {
     string test "[Hello, Kalem!]\n"
+
+    // Kalem does not support class declaring yet.
+    #my_class myclass;
 
     int _test 10
     unsign _test_ 20
@@ -107,6 +117,8 @@
     @print "\n"
 
     @my_test
+
+    @myclass.another_my_class_function
 
     @return 0
 }

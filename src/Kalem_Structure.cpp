@@ -27,7 +27,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
         
     Kalem_Codegen __codegen;
 
-    bool is_argument = false, is_main = false;
+    bool is_argument = false,
+         is_main     = false,
+         is_class    = false,
+         is_function = false;
 
     int vect_size;
 
@@ -130,8 +133,14 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 if(is_argument == false && is_main == false) {
                                     if(_tokens[i + 1] == _KALEM_NAMESPACE) {
                                         __codegen.Kl_Codegen(KALEM_NAMESPACE, _tokens[i + 1], _tokens[i], "");
-                                    } else {
+                                    }
+                                    else if(_tokens[i + 1] == _KALEM_CLASS) {
+                                        __codegen.Kl_Codegen(KALEM_CLASS, _tokens[i + 1], _tokens[i], "");
+                                        is_class = true;
+                                    }
+                                    else {
                                         __codegen.Kl_Codegen(KALEM_FUNCTION, _tokens[i + 1], _tokens[i], "");
+                                        is_function = true;
                                     }
                                 }
                             } else {
@@ -197,7 +206,18 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 
                 case '}':
                 {
-                    __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
+                    if(is_class == true && is_function == false) {
+                        __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", ";", "");
+                        is_class = false;
+                    }
+                    else if(is_function == true) {
+                        __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
+                        is_function = false;
+                    }
+                    else {
+                        __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
+                    }
+
                     break;
                 }
 

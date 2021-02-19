@@ -25,7 +25,10 @@
 #define _KALEM_PRINT     "@print"
 #define _KALEM_GOTO      "@goto"
 #define _KALEM_DEFINE    "#defn"
+
 #define _KALEM_NAMESPACE "namespace"
+#define _KALEM_CLASS     "class"
+
 #define _KALEM_FLAG      "!flag"
 #define _KALEM_LOOP      "loop"
 #define _KALEM_BREAK     "break"
@@ -74,10 +77,14 @@ enum KALEM_TOKEN {
 	KALEM_PRINT,
 	KALEM_GOTO,
 	KALEM_GOTO_CALL,
+
 	KALEM_FUNCTION,
 	KALEM_FUNCTION_CALL,
+
 	KALEM_DEFINE,
+
 	KALEM_NAMESPACE,
+    KALEM_CLASS,
 
     KALEM_FLAG,
     KALEM_REQUIRED_FLAG,

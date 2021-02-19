@@ -181,6 +181,18 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
+        case KALEM_CLASS:
+        {
+            _codegen.kl_generated.append(_KALEM_CLASS);
+            _codegen.kl_generated.append(" ");
+
+            _append = _append.erase(0, 1);
+
+            _codegen.kl_generated.append(_append);
+
+            break;
+        }
+
         case KALEM_DEFINE:
         {
             /* #defn TEST "test" */
@@ -249,7 +261,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
         
         case KALEM_RIGHT_CURLY_BRACKET:
         {
-            _codegen.kl_generated.append(_KALEM_RIGHT_CURLY_BRACKET);
+            _codegen.kl_generated.append(_KALEM_RIGHT_CURLY_BRACKET + _append);
             
             break;
         }
