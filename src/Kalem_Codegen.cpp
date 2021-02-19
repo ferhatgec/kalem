@@ -406,7 +406,9 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
 
         case KALEM_REQUIRED_FLAG:
         {
-            if(stringtools::GetBetweenString(_variable, "(\"", "\")") == "library") {
+            std::string __keyword = stringtools::GetBetweenString(_variable, "(\"", "\")");
+
+            if(__keyword == "library") {
                  _codegen.kl_header_file = true;
 
                  stringtools::replaceAll(_append, ".kalem", "");
@@ -418,7 +420,12 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
                                         + _append
                                         + "_HPP\n"
                                         + _codegen.kl_generated;
-             }
+            }
+            else if(__keyword == "source") {
+                _codegen.kl_header_file = false;
+            }
+
+            __keyword.erase();
 
             break;
         }

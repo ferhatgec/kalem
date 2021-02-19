@@ -1,3 +1,7 @@
+// required_flag just defines file type,
+// for source file it's not required.
+!required_flag("source")
+
 #import <ios>
 #import <stdstr>
 
