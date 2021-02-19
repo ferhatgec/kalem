@@ -1,0 +1,23 @@
+// Kalem Standard Template Library
+//
+// variables.kalem
+//
+// MIT License
+// Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+// Distributed under the terms of the MIT License.
+//
+
+!required_flag("library")
+
+// Extended variable types
+#defn i8 int8_t
+#defn u8 uint8_t
+
+#defn i16 int16_t
+#defn u16 uint16_t
+
+#defn i32 int32_t
+#defn u32 uint32_t
+
+#defn i64 int64_t
+#defn u64 uint64_t
