@@ -27,6 +27,8 @@
 #define _KALEM_GOTO      "@goto"
 #define _KALEM_DEFINE    "#defn"
 
+#define _KALEM_TYPED     "typed"
+
 #define _KALEM_NAMESPACE "namespace"
 #define _KALEM_CLASS     "class"
 
@@ -57,6 +59,8 @@
 #define _CPP_KALEM_PRINT   "std::cout"
 #define _CPP_KALEM_GOTO    "goto"
 #define _CPP_KALEM_DEFINE  "#define"
+#define _CPP_KALEM_TYPED   "typedef"
+
 #define _CPP_KALEM_LOOP    "while"
 
 #define _CPP_KALEM_ELSE    "else"
@@ -85,6 +89,7 @@ enum KALEM_TOKEN {
 	KALEM_FUNCTION_CALL,
 
 	KALEM_DEFINE,
+    KALEM_TYPED,
 
 	KALEM_NAMESPACE,
     KALEM_CLASS,

@@ -235,6 +235,26 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
+        case KALEM_TYPED:
+        {
+            // TODO: Create variable_format() function to convert
+            // Kalem variables to C++ variables.
+
+            // typed string kalem_str
+            _codegen.kl_generated.append(_CPP_KALEM_TYPED);
+
+            stringtools::replaceAll(_variable, "string", "std::string");
+            stringtools::replaceAll(_variable, "unsign", "unsigned");
+
+            _codegen.kl_generated.append(" "
+                + _variable
+                + " "
+                + _append
+                + ";");
+
+            break;
+        }
+
         case KALEM_MAIN:
         {
             _codegen.kl_generated.append(_append);

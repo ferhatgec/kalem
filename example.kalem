@@ -30,6 +30,8 @@
 // import <test.kalem>
 #include <test>
 
+typed uint32_t u32
+
 @my_class class {
 ~public
     @another_my_class_function void {
@@ -63,8 +65,12 @@
     string test "[Hello, Kalem!]\n"
     str my_str_test "Hello str!\n"
 
-    // Kalem does not support class declaring yet.
+    // Kalem does not support class declaring and
+    // user-defined variables yet.
     #my_class myclass;
+
+
+    #u32 uint32_test = 32;
 
     int _test 10
     unsign _test_ 20
@@ -133,6 +139,10 @@
     @myclass.another_my_class_function
 
     @print my_str_test
+
+    @print "U32 uint32_test : "
+    @print uint32_test
+    @print "\n"
 
     @return 0
 }
