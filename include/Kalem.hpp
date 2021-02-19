@@ -18,6 +18,7 @@
 #define _KALEM_UNSIGNED "unsign"
 #define _KALEM_STRING   "string"
 #define _KALEM_CHAR     "char"
+#define _KALEM_STR      "str"
 
 #define _KALEM_IMPORT    "#import"
 #define _KALEM_MAIN      "@main"
@@ -47,6 +48,7 @@
 #define _KALEM_NEWLINE "\n"
 
 #define _CPP_KALEM_UNSIGNED "unsigned"
+#define _CPP_KALEM_STR      "char"
 
 #define _CPP_KALEM_INCLUDE "#include"
 #define _CPP_KALEM_STRING  "std::string"
@@ -68,6 +70,7 @@ enum KALEM_TOKEN {
 	KALEM_UNSIGNED,
 	KALEM_STRING,
     KALEM_CHAR,
+    KALEM_STR,
 
 	KALEM_IMPORT,
 	KALEM_INCLUDE,

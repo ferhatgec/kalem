@@ -247,7 +247,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 default:
                 {
                     /* string test = "kalem" */
-                    if(_tokens[i] == _KALEM_STRING) {
+                    if(_tokens[i] == _KALEM_STRING || _tokens[i] == _KALEM_STR) {
                         if(_tokens[i + 2][0] != '=') {
                             if(_tokens[i + 2][0] == '"') {
                                 std::string _str_data;
@@ -263,7 +263,8 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     }
                                 }
 
-                                 __codegen.Kl_Codegen(KALEM_STRING, _tokens[i + 1], _str_data, "");
+                                if(_tokens[i]      == _KALEM_STRING) __codegen.Kl_Codegen(KALEM_STRING, _tokens[i + 1], _str_data, "");
+                                else if(_tokens[i] == _KALEM_STR)    __codegen.Kl_Codegen(KALEM_STR, _tokens[i + 1], _str_data, "");
                             } else {
                                 /* Syntax error (string x =)*/
                             }
