@@ -23,7 +23,7 @@ public:
     std::string kl_cpp_standard     = "c++17";
     std::string kl_cpp_flags        = "-lstdc++fs";
     std::string kl_cpp_compiler     = "clang++";
-    std::string kl_cpp_include_dirs = "";
+    std::string kl_cpp_include_dirs = "-I/usr/include/kalem/stl/ ";
     std::string kl_cpp_sysroot      = "";
 
     std::vector<std::string> kl_source_files;

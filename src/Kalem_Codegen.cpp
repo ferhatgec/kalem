@@ -445,7 +445,9 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             if(__keyword == "library") {
                  _codegen.kl_header_file = true;
 
-                 stringtools::replaceAll(_append, ".kalem", "");
+                _append = stringtools::EraseAllSubString(_append, "/usr/include/kalem/stl/");
+
+                stringtools::replaceAll(_append, ".kalem", "");
 
                  _codegen.kl_generated = "#ifndef "
                                         + _append

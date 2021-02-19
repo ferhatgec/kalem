@@ -55,6 +55,8 @@ int main(int argc, char** argv) {
 
     bool option = false;
 
+    std::string file;
+
     /* kalem test1.kalem test1.kalem */
     std::string kl_source_file(argv[1]);
     std::string kl_output_file = "";
@@ -94,7 +96,6 @@ int main(int argc, char** argv) {
     for (auto i = __codegen_.kl_source_files.begin(); i != __codegen_.kl_source_files.end(); ++i) {
         _main = kalem.Init(*i + ".kalem");
 
-
         if(__codegen_.kl_hash_cache == true) {
             if(hash_checker.HashInit(*i + ".kalem") == true) {
                 std::cout << "Skipped : " + *i + ".kalem\n";
@@ -103,21 +104,23 @@ int main(int argc, char** argv) {
 
         temp_codegen = _structure.ReadSource(_main);
 
+        file = stringtools::EraseAllSubString(*i, "/usr/include/kalem/stl/");
+
         if(fsplusplus::IsExistFile(fsplusplus::GetCurrentWorkingDir()
                                    + "/"
-                                   + *i
+                                   + file
                                    + ".hpp")) {
-            _exec.RunFunction("rm -f " + *i + ".hpp");
+            _exec.RunFunction("rm -f " + file + ".hpp");
         }
 
         if(temp_codegen.kl_header_file == true) {
-            temp_codegen.kl_generated.append("\n#endif");
+            temp_codegen.kl_generated.append("\n#endif\n");
         }
 
-        fsplusplus::CreateFile(*i + ".hpp", temp_codegen.kl_generated);
+        fsplusplus::CreateFile(file + ".hpp", temp_codegen.kl_generated);
 
         if(__codegen_.kl_hash_cache == true) {
-            hash_checker.HashCreate(*i + ".kalem");
+            hash_checker.HashCreate(file + ".kalem");
         }
     }
 

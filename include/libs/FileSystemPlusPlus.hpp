@@ -14,6 +14,8 @@
 #include <fstream>
 #include <sys/stat.h>
 
+#include "StringTools.hpp"
+
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
@@ -366,7 +368,13 @@ namespace fsplusplus {
     	
     static std::string ReadFileWithReturn(std::string file) {
 		std::string line, data;
-        std::ifstream readfile((fsplusplus::GetCurrentWorkingDir() + "/" + file).c_str());
+
+		std::ifstream  readfile;
+
+		if(file[0] == '/')
+            readfile.open(file.c_str());
+		else
+		    readfile.open((fsplusplus::GetCurrentWorkingDir() + "/" + file).c_str());
     	
     	if(readfile.is_open()) {
         	while (std::getline(readfile, line)) data.append(line + "\n");
@@ -484,12 +492,7 @@ namespace fsplusplus {
 	}
 	
 	static void CreateFile(std::string name, std::string input) {
-        std::string path;
-        path.append(fsplusplus::GetCurrentWorkingDir());
-        path.append("/");
-        path.append(name);
-    
-        std::ofstream file(path, std::ios::app);
+        std::ofstream file(stringtools::EraseAllSubString(name, "/usr/include/kalem/stl/"), std::ios::app);
         file << input;
         file.close();
 	}
