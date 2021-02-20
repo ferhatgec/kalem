@@ -161,5 +161,14 @@
     @print math::factorial(7)
     @print "\n"
 
+    @print "log2(32) : "
+    @print math::binary_log2(32)
+    @print "\n"
+
+    // Base = 10 logarithm
+    @print "log(32) : "
+    @print math::log(32, 10)
+    @print "\n"
+
     @return 0
 }

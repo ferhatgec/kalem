@@ -299,7 +299,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     } else if(_tokens[i] == _KALEM_ELSE_IF) {
                         __codegen.Kl_Codegen(KALEM_ELSE_IF, "", stringtools::GetBetweenString(_data, "(", ") {"), "");
                     } else if(_tokens[i] == _KALEM_LOOP) {
-                        __codegen.Kl_Codegen(KALEM_LOOP, "", "", "");
+                        __codegen.Kl_Codegen(KALEM_LOOP, _tokens[i + 1], "", "");
                     } else if(_tokens[i] == _KALEM_BREAK) {
                         __codegen.Kl_Codegen(KALEM_BREAK, "", "", "");
                     } else if(_tokens[i] == _KALEM_CONTINUE) {

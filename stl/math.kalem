@@ -9,6 +9,12 @@
 
 !required_flag("library")
 
+!add_source("/usr/include/kalem/stl/variables")
+
+#include "variables"
+
+#defn PI 3.142
+
 @math namespace {
     @factorial(unsign n) int {
         if (n == 0) {
@@ -16,5 +22,28 @@
         }
 
         @return n*factorial(n-1)
+    }
+
+    @binary_log2(u32 n) u16 {
+        // Undefined
+        if (n == 0) {
+            // TODO: throw exception
+            @print "Undefined\n"
+            @return 0
+        }
+
+        #u16 log_val = - 1;
+
+        loop (n) {
+            log_val++
+            #n >>= 1;
+        }
+
+        @return log_val
+    }
+
+    // Base logarithm
+    @log(u32 a, u32 b) u32 {
+        @return binary_log2(a)/binary_log2(b)
     }
 }

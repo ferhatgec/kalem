@@ -366,15 +366,19 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
-        case KALEM_LOOP:
-        {
+        case KALEM_LOOP: {
             /* loop {
              * ...
              * }
              * */
 
             _codegen.kl_generated.append(_CPP_KALEM_LOOP);
-            _codegen.kl_generated.append("(1)");
+
+            if(_variable == "{" || _variable == "") {
+                _codegen.kl_generated.append("(1)");
+            } else {
+                _codegen.kl_generated.append(_variable);
+            }
 
             break;
         }
