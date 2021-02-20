@@ -11,7 +11,7 @@
 // Some of Kalem's runtime flags.
 !flag("output=testikebabi")
 !flag("cpp-standard=c++2a")
-!flag("cpp-output=false")
+!flag("cpp-output=true")
 !flag("cpp-sysroot=false")
 
 // default=clang
@@ -27,6 +27,7 @@
 // add 'kalem-stl' runtime flag.
 
 !add_source("test")
+!add_source("/usr/include/kalem/stl/variables")
 
 #import <StringTools.hpp>
 

@@ -32,7 +32,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
          is_class    = false,
          is_function = false;
 
-    int vect_size;
+    int vect_size, data_size;
 
     /* #import */
     retry:while(std::getline(_source, _data)) {
@@ -44,7 +44,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
          vect_size = std::ssize(_tokens);
 
          for(int i = 0; i < _tokens.size(); i++) {
-            switch(_tokens[i][0]) {
+             data_size = _tokens[i].length();
+
+             switch(_tokens[i][0]) {
                 case '/':
                 {
                     if(_tokens[i][1] == '/') {
@@ -150,8 +152,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 arguments = stringtools::GetBetweenString(_data, "(", ")");
 
                                 if(arguments != "error" && is_main == false) {
-                                    for(unsigned q = 0; _tokens[i][q] != '('; q++) {
-                                        function_name.push_back((char)_tokens[i][q]);
+                                    for(unsigned q = 0; q < data_size; q++) {
+                                        if(_tokens[i][q] != '(') function_name.append(1, _tokens[i][q]);
+                                        else
+                                            break;
                                     }
 
                                     __data = stringtools::EraseAllSubString(_data,
@@ -163,8 +167,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                 } else {
                                     std::string function_name, arguments, __data;
 
-                                    for(unsigned q = 0; _tokens[i][q] != '('; q++) {
-                                        function_name.push_back((char)_tokens[i][q]);
+                                    for(unsigned q = 0; q < data_size; q++) {
+                                        if(_tokens[i][q] != '(') function_name.append(1, _tokens[i][q]);
+                                        else
+                                            break;
                                     }
 
                                     __data = stringtools::GetBetweenString(_data, function_name + "(", ")");
@@ -181,8 +187,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         } else {
                             std::string function_name, arguments, __data;
 
-                            for(unsigned q = 0; _tokens[i][q] != '('; q++) {
-                                function_name.push_back((char)_tokens[i][q]);
+                            for(unsigned q = 0; q < data_size; q++) {
+                                if(_tokens[i][q] != '(') function_name.append(1, _tokens[i][q]);
+                                else
+                                    break;
                             }
 
                             __data = stringtools::GetBetweenString(_data, function_name + "(", ")");
