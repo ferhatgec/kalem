@@ -46,4 +46,13 @@
     @log(u32 a, u32 b) u32 {
         @return binary_log2(a)/binary_log2(b)
     }
+
+    // Absolute
+    @abs(int i) int {
+        if (i < 0) {
+            @return -i
+        }
+
+        @return i
+    }
 }
