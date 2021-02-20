@@ -27,13 +27,19 @@
 // add 'kalem-stl' runtime flag.
 
 !add_source("test")
+
+// TODO: For STL files, make it automatically.
 !add_source("/usr/include/kalem/stl/variables")
+!add_source("/usr/include/kalem/stl/math")
 
 #import <StringTools.hpp>
 
 // import <test.kalem>
 #include <test>
+
+// STL files
 #include <variables>
+#include <math>
 
 @my_class class {
 ~public
@@ -149,6 +155,10 @@
 
     @print "int16_test : "
     @print int16_test
+    @print "\n"
+
+    @print "factorial(7) : "
+    @print math::factorial(7)
     @print "\n"
 
     @return 0

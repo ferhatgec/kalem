@@ -20,8 +20,7 @@ kl_codegen
 KalemStructure::ReadSource(kalem_t kalem) {
     std::istringstream _source(kalem.kl_file_data);
     
-    std::string _data;
-    std::string _token;
+    std::string _data = "", _token = "";
     
     std::vector<std::string> _tokens; 
         
@@ -32,7 +31,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
          is_class    = false,
          is_function = false;
 
-    int vect_size, data_size;
+    int vect_size = 0, data_size = 0;
 
     /* #import */
     retry:while(std::getline(_source, _data)) {
@@ -88,19 +87,18 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         /* To directly use C++ & C code */
                         __codegen.Kl_Codegen(KALEM_LINK, _data, "", "");
 
-                        goto retry; 
+                        goto retry;
                     }
-                
+
                     break;
                 }
-                
+
                 case '@':
                 {
-
                     /* @main int */
                     if(_tokens[i] == _KALEM_MAIN) {
                         /* TODO:
-                            Create checkINT() function 
+                            Create checkINT() function
                         */
 
                         __codegen.Kl_Codegen(KALEM_MAIN, "", _tokens[i + 1], "");
@@ -111,10 +109,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     } else if(_tokens[i] == _KALEM_PRINT) {
                         if(_tokens[i + 1][0] == '"') {
                             std::string _str_data;
-                            
+
                             for(unsigned f = i+1;;) {
                                 _str_data.append(_tokens[f]);
-                                
+
                                 if(_tokens[f][_tokens[f].length() - 1] == '"') {
                                     break;
                                 } else {
@@ -122,7 +120,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     f++;
                                 }
                             }
-                            
+
                              __codegen.Kl_Codegen(KALEM_PRINT, "", _str_data, "");
                         } else {
                             __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1], "");
@@ -148,7 +146,7 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     }
                                 }
                             } else {
-                                std::string arguments, function_name, __data;
+                                std::string arguments = "", function_name = "", __data = "";
                                 arguments = stringtools::GetBetweenString(_data, "(", ")");
 
                                 if(arguments != "error" && is_main == false) {
@@ -164,6 +162,8 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     __data = (MakeTokenizable(__data)[0]);
 
                                     __codegen.Kl_Codegen(KALEM_FUNCTION, __data, function_name, arguments);
+
+                                    i = i + 2;
                                 } else {
                                     std::string function_name, arguments, __data;
 
@@ -204,16 +204,16 @@ KalemStructure::ReadSource(kalem_t kalem) {
                             }
                         }
                     }
-                    
+
                     break;
                 }
-                
+
                 case '{':
                 {
                     __codegen.Kl_Codegen(KALEM_LEFT_CURLY_BRACKET, "", "", "");
                     break;
                 }
-                
+
                 case '}':
                 {
                     if(is_class == true && is_function == false) {
@@ -320,12 +320,12 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     break;
                 }
             }
-                
-         } 
-         
+
+         }
+
          __codegen.Kl_Codegen(KALEM_NEWLINE, "", "", "");
     }
-    
+
     return __codegen._codegen;
 }
 
@@ -333,11 +333,18 @@ std::vector<std::string>
 KalemStructure::MakeTokenizable(std::string _data) {
     std::vector<std::string> _kalem_tokens;
     std::istringstream _kalem_stream(_data);
-    std::string _append;
-    
-    while(std::getline(_kalem_stream, _append, ' ')) {
-        _kalem_tokens.push_back(_append); 
+    std::string _append = "";
+
+    while(_kalem_stream >> _append) {
+        _kalem_tokens.push_back(_append);
     }
-    
+
+    /*while(std::getline(_kalem_stream, _append, ' ')) {
+        _kalem_tokens.push_back(_append);
+    }*/
+
+    _kalem_stream.clear();
+    _append.erase();
+
     return _kalem_tokens;
 }

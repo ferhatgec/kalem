@@ -198,15 +198,14 @@ namespace stringtools {
   		return (*unsigned_str_1 > *unsigned_str_2) - (*unsigned_str_1 < *unsigned_str_2);
 	}
 	
-	static inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v") {
-    	s.erase(0, s.find_first_not_of(t));
-    	return s;
-	}
+    static inline std::string& ltrim(std::string& s) {
+        return s.erase(0, s.find_first_not_of(" \t\n\r\f\v"));
+    }
 	
 	static inline std::string& rtrim(std::string& s, const char* t = " \t\n\r\f\v") {
-		s.erase(s.find_last_not_of(t) + 1);
-		return s;
-	}
+        s.erase(s.find_last_not_of(t) + 1);
+        return s;
+    }
 	
 	static inline std::string& trim(std::string& s, const char* t = " \t\n\r\f\v") {
 		rtrim(s);

@@ -51,7 +51,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
                 _append.pop_back();
 
                 _append.append(".hpp");
-                _append.push_back(last);
+                _append.append(1, last);
             }
 
             _codegen.kl_generated.append(_append);
@@ -391,12 +391,18 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
 
             unsigned i = 1;
 
-            for(; _append[i] != '='; i++) {
-                flag.push_back(_append[i]);
+            for(; i < _append.length(); i++) {
+                if(_append[i] != '=')
+                    flag.append(1, _append[i]);
+                else
+                    break;
             }
 
-            for(++i; _append[i] != '"'; i++) {
-                append_flag.push_back(_append[i]);
+            for(++i; _append.length(); i++) {
+                if(_append[i] != '"')
+                    append_flag.append(1, _append[i]);
+                else
+                    break;
             }
 
             if(flag == "output") {
