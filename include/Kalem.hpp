@@ -42,6 +42,8 @@
 #define _KALEM_ELSE      "els"
 #define _KALEM_ELSE_IF   "elsif"
 
+#define _KALEM_NIL       "nil"
+
 #define _KALEM_VOID   "void"
 
 #define _KALEM_LEFT_CURLY_BRACKET  "{"

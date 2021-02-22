@@ -174,6 +174,8 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                     __codegen.Kl_Codegen(KALEM_FUNCTION, __data, function_name, arguments);
 
                                     i = i + 2;
+
+                                    is_function = true;
                                 } else {
                                     std::string function_name, arguments, __data;
 
@@ -269,9 +271,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     /* string test = "kalem" */
                     if(_tokens[i] == _KALEM_STRING || _tokens[i] == _KALEM_STR) {
                         if(_tokens[i + 2][0] != '=') {
-                            if(_tokens[i + 2][0] == '"') {
-                                std::string _str_data;
+                            std::string _str_data = "";
 
+                            if(_tokens[i + 2] != _KALEM_NIL && _tokens[i + 2][0] == '"') {
                                 for(unsigned f = i + 2;;) {
                                     _str_data.append(_tokens[f]);
 
@@ -282,12 +284,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                                         f++;
                                     }
                                 }
-
-                                if(_tokens[i]      == _KALEM_STRING) __codegen.Kl_Codegen(KALEM_STRING, _tokens[i + 1], _str_data, "");
-                                else if(_tokens[i] == _KALEM_STR)    __codegen.Kl_Codegen(KALEM_STR, _tokens[i + 1], _str_data, "");
-                            } else {
-                                /* Syntax error (string x =)*/
                             }
+
+                            if(_tokens[i]      == _KALEM_STRING) __codegen.Kl_Codegen(KALEM_STRING, _tokens[i + 1], _str_data, "");
+                            else if(_tokens[i] == _KALEM_STR)    __codegen.Kl_Codegen(KALEM_STR, _tokens[i + 1], _str_data, "");
                         }
                     } else if(_tokens[i] == _KALEM_UNSIGNED
                         || _tokens[i] == _KALEM_INT
