@@ -107,9 +107,19 @@ KalemStructure::ReadSource(kalem_t kalem) {
                     } else if(_tokens[i] == _KALEM_RETURN) {
                         __codegen.Kl_Codegen(KALEM_RETURN, "", _tokens[i + 1], "");
                     } else if(_tokens[i] == _KALEM_PRINT) {
-                        if(_tokens[i + 1][0] == '"') {
-                            std::string _str_data;
+                        std::string _str_data;
 
+                        if(_tokens[i + 1][0] == '(') {
+                            _str_data = stringtools::GetBetweenString(_data, "(", ")");
+
+                            if(_str_data == "error") {
+                                // Parse error
+                                break;
+                            }
+
+                            __codegen.Kl_Codegen(KALEM_PRINT, "", _str_data, "");
+                        }
+                        else if(_tokens[i + 1][0] == '"') {
                             for(unsigned f = i+1;;) {
                                 _str_data.append(_tokens[f]);
 

@@ -458,6 +458,7 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
                 _append = stringtools::EraseAllSubString(_append, "/usr/include/kalem/stl/");
 
                 stringtools::replaceAll(_append, ".kalem", "");
+                stringtools::replaceAll(_append, "/", "_");
 
                  _codegen.kl_generated = "#ifndef "
                                         + _append
