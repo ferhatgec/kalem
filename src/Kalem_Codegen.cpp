@@ -383,6 +383,49 @@ Kalem_Codegen::Kl_Codegen(KALEM_TOKEN _token, std::string _variable, std::string
             break;
         }
 
+        case KALEM_SWITCH:
+        {
+            /* switch (...) {
+             *  ~KALEM_LOOP
+             *   {
+             *      @print "loop\n"
+             *      break
+             *   }
+             *
+             *   ~default
+             *   {
+             *      @print "\n"
+             *      break
+             *   }
+             * }
+             * */
+
+            _codegen.kl_generated.append(_CPP_KALEM_SWITCH);
+
+            _codegen.kl_generated.append(_variable);
+
+            break;
+        }
+
+        case KALEM_CASE:
+        {
+            _append = _append.erase(0, 1);
+
+            if(_append != "default") {
+                _append = static_cast<std::string>(_CPP_KALEM_CASE)
+                          + " "
+                          + _append
+                          + ":";
+            }
+            else {
+                _append = _append + ":";
+            }
+
+            _codegen.kl_generated.append(_append);
+
+            break;
+        }
+
         // TODO: Create Kalem_Flags.hpp & Kalem_Flags.cpp
         // for all supported flags.
         case KALEM_FLAG:

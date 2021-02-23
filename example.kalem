@@ -43,6 +43,9 @@
 #include <math>
 #include <tools>
 
+#defn LOWERCASE_A 'a'
+#defn UPPERCASE_A 'A'
+
 @my_class class {
 ~public
     @another_my_class_function void {
@@ -184,6 +187,27 @@
     @lowercase_a=tools::toupper(lowercase_a)
 
     @print lowercase_a
+    @print "\n"
+
+    @print "Character: "
+
+    switch (lowercase_a) {
+        ~LOWERCASE_A {
+            @print "LOWERCASE_A"
+            break
+        }
+
+        ~UPPERCASE_A {
+            @print "UPPERCASE_A"
+            break
+        }
+
+        ~default {
+            @print "Undefined"
+            break
+        }
+    }
+
     @print "\n"
 
     @return 0

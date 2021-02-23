@@ -29,7 +29,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
     bool is_argument = false,
          is_main     = false,
          is_class    = false,
-         is_function = false;
+         is_function = false,
+         is_switch   = false,
+         is_case     = false;
 
     int vect_size = 0, data_size = 0;
 
@@ -243,6 +245,14 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
                         is_function = false;
                     }
+                    else if(is_case == true && is_switch == true) {
+                        __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
+                        is_case = false;
+                    }
+                    else if(is_case == false && is_switch == true) {
+                        __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
+                        is_switch = false;
+                    }
                     else {
                         __codegen.Kl_Codegen(KALEM_RIGHT_CURLY_BRACKET, "", "", "");
                     }
@@ -268,6 +278,10 @@ KalemStructure::ReadSource(kalem_t kalem) {
                 {
                     if(is_class == true) {
                         __codegen.Kl_Codegen(KALEM_CLASS_MEMBER_VISIBILITY, "", _tokens[i], "");
+                    }
+                    else if(is_switch == true) {
+                        __codegen.Kl_Codegen(KALEM_CASE, "", _tokens[i], "");
+                        is_case = true;
                     }
 
                     break;
@@ -321,6 +335,9 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         __codegen.Kl_Codegen(KALEM_BREAK, "", "", "");
                     } else if(_tokens[i] == _KALEM_CONTINUE) {
                         __codegen.Kl_Codegen(KALEM_CONTINUE, "", "", "");
+                    } else if(_tokens[i] == _KALEM_SWITCH) {
+                        __codegen.Kl_Codegen(KALEM_SWITCH , _tokens[i + 1], "", "");
+                        is_switch = true;
                     } else if(_tokens[i] == _KALEM_TYPED) {
                         // typed
                         __codegen.Kl_Codegen(KALEM_TYPED, _tokens[i + 1], _tokens[i + 2], "");

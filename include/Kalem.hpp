@@ -36,6 +36,8 @@
 #define _KALEM_LOOP      "loop"
 #define _KALEM_BREAK     "break"
 #define _KALEM_CONTINUE  "continue"
+#define _KALEM_SWITCH    "switch"
+#define _KALEM_CASE      "case"
 
 #define _KALEM_IF        "if"
 #define _KALEM_WHILE     "while"
@@ -64,6 +66,8 @@
 #define _CPP_KALEM_TYPED   "typedef"
 
 #define _CPP_KALEM_LOOP    "while"
+#define _CPP_KALEM_SWITCH  "switch"
+#define _CPP_KALEM_CASE    "case"
 
 #define _CPP_KALEM_ELSE    "else"
 
@@ -103,6 +107,9 @@ enum KALEM_TOKEN {
     KALEM_ADD_SOURCE,
 
     KALEM_LOOP,
+
+    KALEM_SWITCH,
+    KALEM_CASE,
 
     KALEM_BREAK,
     KALEM_CONTINUE,
