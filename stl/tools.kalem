@@ -1,0 +1,61 @@
+// Kalem Standard Template Library
+//
+// tools.kalem
+//
+// MIT License
+// Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+// Distributed under the terms of the MIT License.
+//
+
+
+!required_flag("source")
+
+#import <ios>
+
+@tools namespace {
+    @isupper(char ch) int {
+        @return (ch>='A'&&ch<='Z')
+    }
+
+    @islower(char ch) int {
+        @return (ch>='a'&&ch<='z')
+    }
+
+    @isalpha(char ch) int {
+    	@return (tools::isupper(ch)||tools::islower(ch))
+    }
+
+    @isdigit(char ch) int {
+        @return (ch>='0'&&ch<='9')
+    }
+
+    @isalnum(char ch) int {
+      	@return (tools::isalpha(ch)||tools::isdigit(ch))
+    }
+
+    @isblank(char ch) int {
+    	@return (ch==0x20)
+    }
+
+    @isprint(char ch) int {
+      	@return (ch>=0x20&&ch<=0x7E)
+    }
+
+    @toupper(char ch) int {
+        // A - 32 = A
+    	if (tools::islower(ch)==1) {
+    	    @ch=ch-32
+    	}
+
+    	@return ch
+    }
+
+    @tolower(char ch) int {
+        // A + 32 = a
+    	if (tools::isupper(ch)==1) {
+    	    @ch=ch+32
+    	}
+
+    	@return ch
+    }
+}

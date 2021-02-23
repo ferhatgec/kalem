@@ -31,6 +31,7 @@
 // TODO: For STL files, make it automatically.
 !add_source("/usr/include/kalem/stl/variables")
 !add_source("/usr/include/kalem/stl/math")
+!add_source("/usr/include/kalem/stl/tools")
 
 #import <StringTools.hpp>
 
@@ -40,6 +41,7 @@
 // STL files
 #include <variables>
 #include <math>
+#include <tools>
 
 @my_class class {
 ~public
@@ -145,7 +147,7 @@
 
     @my_test
 
-    @myclass.another_my_class_function
+    @myclass.another_my_class_function()
 
     @print my_str_test
 
@@ -172,6 +174,16 @@
 
     @print "abs(-2021) : "
     @print math::abs(-2021)
+    @print "\n"
+
+    char lowercase_a 'a'
+
+    @print "lowercase_a : a\n"
+    @print "to_upper(lowercase_a) : "
+
+    @lowercase_a=tools::toupper(lowercase_a)
+
+    @print lowercase_a
     @print "\n"
 
     @return 0

@@ -135,11 +135,18 @@ KalemStructure::ReadSource(kalem_t kalem) {
                         } else {
                             __codegen.Kl_Codegen(KALEM_PRINT, "", _tokens[i + 1], "");
                         }
-                    } else if(_tokens[i] == _KALEM_GOTO) {
+                    }
+                    else if(_tokens[i] == _KALEM_GOTO) {
                         __codegen.Kl_Codegen(KALEM_GOTO, "", _tokens[i + 1], "");
-                    } else if(_tokens[i][_tokens[i].length() - 1] == ':') {
+                    }
+                    else if(_tokens[i][_tokens[i].length() - 1] == ':') {
                         __codegen.Kl_Codegen(KALEM_GOTO_CALL, "", _tokens[i], "");
-                    }  else {
+                    }
+                    else if(stringtools::Find(_tokens[i], ".") == true
+                        || stringtools::Find(_tokens[i], "=") == true) {
+                        __codegen.Kl_Codegen(KALEM_NONE, _data.erase(0, 1), "", "");
+                    }
+                    else {
                         if(i + 2 < vect_size) {
                             if(_tokens[i + 2][0] == '{') {
                                 if(is_argument == false && is_main == false) {
